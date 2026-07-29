@@ -1,8 +1,11 @@
-# This project (Spifora-site root) is the static marketing/download site +
-# the invitation hand-off page — deployed to spifora.com.
-#
-# public-viewer/ is a SEPARATE React app deployed as its OWN Vercel project
-# (its own subdomain, e.g. view.spifora.com — see public-viewer/README.md).
-# Excluded here so this project doesn't ship its source/node_modules/dist.
-public-viewer
+# .vercelignore applies repo-wide, to EVERY Vercel project connected to this
+# repo — NOT scoped to a project's configured Root Directory. Earlier this
+# listed "public-viewer" to keep its source out of the marketing site's
+# static deploy, but that same rule was silently deleting public-viewer's
+# own package.json before ITS project's build ever ran (its Root Directory
+# is public-viewer, but ignore-file stripping happens on the full clone
+# first) — every "npm error enoent ... public-viewer/package.json" failure
+# traced back to this one line. Removed; the marketing site now just ships
+# public-viewer's source as inert static files (harmless — same content is
+# already public on GitHub, nothing there is executed or routed to).
 downloads/README.txt
