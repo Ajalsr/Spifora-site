@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Download Spifora — Desktop App</title>
+<meta name="description" content="Download Spifora, the native desktop ERP: Finance, Inventory, Sales, Purchasing, HR &amp; Payroll. Windows, macOS and Linux.">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap">
+<style>
+  :root{
+    --ink:#0b1220; --ink-soft:#232b36; --sub:#5b6472; --sub-soft:#8891a0;
+    --accent:#0d7a91; --accent-dark:#0a5f74; --accent-soft:#e7f3f5;
+    --gold:#b8842f; --gold-soft:#fbf1e2;
+    --good:#15803d; --good-soft:#e7f8ee; --bad:#b91c1c; --bad-soft:#fdeaea;
+    --bg:#f8f6f1; --card:#ffffff; --line:#e7e3da; --line-soft:#f0ede6;
+    --radius:20px; --radius-sm:13px;
+    --shadow-sm:0 1px 2px rgba(11,18,32,.05);
+    --shadow-md:0 10px 28px rgba(11,18,32,.07);
+    --shadow-lg:0 26px 64px rgba(11,18,32,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto;} *{animation:none !important;transition:none !important;} }
+  body{font-family:"IBM Plex Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;}
+  a:hover{color:var(--accent-dark);}
+  a:focus-visible,button:focus-visible,input:focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:6px;}
+  .heading{font-family:Sora,sans-serif;font-weight:800;letter-spacing:-0.015em;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  input::placeholder{color:var(--sub-soft);}
+  section{scroll-margin-top:70px;}
+
+  /* ── Header ─────────────────────────────────────────────────────── */
+  header.site{position:sticky;top:0;z-index:50;background:rgba(248,246,241,0.86);backdrop-filter:blur(12px) saturate(140%);border-bottom:1px solid var(--line);}
+  .navbar{display:flex;align-items:center;justify-content:space-between;padding:15px 0;}
+  .brand{display:flex;align-items:center;gap:9px;font-size:21px;color:var(--ink);}
+  .brand .dot{width:10px;height:10px;border-radius:3px;background:var(--accent);display:inline-block;box-shadow:0 0 0 4px var(--accent-soft);}
+  .navlinks{display:flex;align-items:center;gap:28px;font-size:15px;font-weight:600;}
+  .navlinks a:not(.btn-nav){color:var(--sub);transition:color .15s;position:relative;}
+  .navlinks a:not(.btn-nav):hover{color:var(--ink);}
+  .btn-nav{background:var(--ink);color:#fff !important;padding:10px 20px;border-radius:999px;transition:background .15s,transform .15s;font-size:14.5px;}
+  .btn-nav:hover{background:var(--accent) !important;transform:translateY(-1px);}
+
+  /* ── Hero ───────────────────────────────────────────────────────── */
+  .hero{position:relative;padding:84px 0 60px;text-align:center;overflow:hidden;}
+  .hero::before{content:"";position:absolute;top:-220px;left:50%;width:1000px;height:560px;transform:translateX(-50%);
+    background:radial-gradient(closest-side,rgba(13,122,145,.14),transparent 72%),radial-gradient(closest-side at 30% 60%,rgba(184,132,47,.10),transparent 70%);
+    filter:blur(4px);pointer-events:none;z-index:0;}
+  .hero > .wrap{position:relative;z-index:1;}
+  .badge{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:999px;font-size:13.5px;font-weight:700;letter-spacing:.02em;color:var(--sub);margin-bottom:26px;box-shadow:var(--shadow-sm);}
+  .badge .pulse{width:7px;height:7px;border-radius:50%;background:#22c55e;box-shadow:0 0 0 0 rgba(34,197,94,.5);animation:pulse 2s infinite;flex-shrink:0;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.5);}70%{box-shadow:0 0 0 8px rgba(34,197,94,0);}100%{box-shadow:0 0 0 0 rgba(34,197,94,0);}}
+  h1.hero-title{font-size:clamp(34px,5.6vw,56px);max-width:780px;margin:0 auto 20px;line-height:1.08;}
+  h1.hero-title .accentword{color:var(--accent-dark);}
+  .hero p.lead{font-size:19px;color:var(--sub);max-width:580px;margin:0 auto 36px;}
+
+  .primary-cta{display:inline-flex;align-items:center;gap:11px;background:linear-gradient(160deg,var(--ink),#000);color:#fff;padding:18px 34px;border-radius:15px;font-size:18.5px;font-weight:700;box-shadow:0 16px 36px rgba(11,18,32,.24);transition:transform .15s,box-shadow .15s,background .15s;}
+  .primary-cta:hover{transform:translateY(-2px);box-shadow:0 20px 44px rgba(11,18,32,.3);background:linear-gradient(160deg,var(--accent-dark),var(--ink));color:#fff;}
+  .primary-cta svg{width:19px;height:19px;flex-shrink:0;}
+  .hero-sub{margin-top:16px;font-size:14.5px;color:var(--sub-soft);}
+  .hero-sub b{color:var(--sub);font-weight:700;}
+
+  /* ── License card: Check vs Request ────────────────────────────── */
+  .lic-card{max-width:620px;margin:40px auto 0;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-md);}
+  .lic-tabs{display:flex;gap:4px;padding:6px;background:var(--line-soft);}
+  .lic-tab{flex:1;display:flex;align-items:center;justify-content:center;gap:7px;padding:12px;border:none;border-radius:10px;background:transparent;color:var(--sub);font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background .15s,color .15s,box-shadow .15s;}
+  .lic-tab svg{width:15px;height:15px;flex-shrink:0;opacity:.75;}
+  .lic-tab.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);}
+  .lic-tab.active svg{opacity:1;color:var(--accent-dark);}
+  .lic-panel{padding:24px;display:none;flex-direction:column;gap:11px;}
+  .lic-panel.active{display:flex;}
+  .lic-row{display:flex;gap:8px;}
+  .lic-input{height:52px;padding:0 18px;border-radius:12px;border:1.5px solid var(--line);font-size:14.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.03em;outline:none;background:var(--bg);transition:border-color .15s,background .15s;}
+  .lic-row .lic-input{flex:1;}
+  .txt-input{height:52px;padding:0 18px;border-radius:12px;border:1.5px solid var(--line);font-size:14.5px;outline:none;font-family:inherit;background:var(--bg);transition:border-color .15s;}
+  .lic-input:focus,.txt-input:focus{border-color:var(--accent);background:#fff;}
+  .btn-solid{height:52px;padding:0 24px;border-radius:12px;border:none;background:var(--ink);color:#fff;font-size:14px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .15s,transform .1s;}
+  .btn-solid:hover:not(:disabled){background:var(--accent-dark);}
+  .btn-solid:active:not(:disabled){transform:scale(.98);}
+  .btn-solid:disabled{opacity:.55;cursor:not-allowed;}
+  .lic-error{color:var(--bad);font-size:12.5px;font-weight:600;margin:0;background:var(--bad-soft);padding:9px 12px;border-radius:9px;}
+  .lic-ok{color:var(--good);font-size:13.5px;font-weight:700;margin:0;background:var(--good-soft);padding:11px 14px;border-radius:9px;}
+  .lic-summary{margin-top:4px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:17px 19px;}
+  .lic-summary-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+  .lic-plan{font-size:15px;font-weight:800;}
+  .lic-customer{font-size:12.5px;color:var(--sub);margin-top:2px;}
+  .lic-usage{font-size:12px;font-weight:700;padding:4px 11px;border-radius:999px;white-space:nowrap;}
+  .lic-usage.ok{background:var(--good-soft);color:var(--good);}
+  .lic-usage.full{background:var(--bad-soft);color:var(--bad);}
+  .lic-expiry{font-size:11.5px;color:var(--sub);margin-top:7px;}
+  .lic-modules{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px;}
+  .lic-badge{font-size:11px;font-weight:700;padding:4px 11px;border-radius:999px;background:var(--accent);color:#fff;}
+  .upgrade-toggle{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:700;color:var(--ink);cursor:pointer;background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;}
+  .upgrade-toggle input{width:16px;height:16px;accent-color:var(--accent);flex-shrink:0;}
+  .mod-chip{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--sub);cursor:pointer;user-select:none;transition:all .15s;}
+  .mod-chip.on{border-color:var(--accent);background:var(--accent);color:#fff;}
+
+  .billing-toggle{display:inline-flex;background:var(--line-soft);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px;margin-bottom:14px;}
+  .billing-opt{border:none;background:transparent;padding:8px 16px;border-radius:999px;font-size:13px;font-weight:700;color:var(--sub);cursor:pointer;font-family:inherit;transition:background .15s,color .15s;}
+  .billing-opt.active{background:#fff;color:var(--ink);box-shadow:var(--shadow-sm);}
+  .billing-opt span{color:var(--good);font-weight:800;}
+
+  .tier-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 17px;border-radius:14px;border:1.5px solid var(--line);cursor:pointer;transition:all .15s;background:#fff;}
+  .tier-row:hover{border-color:var(--sub-soft);}
+  .tier-row.selected{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px rgba(13,122,145,.08) inset;}
+  .tier-row .tier-name{font-size:14.5px;font-weight:800;}
+  .tier-row .tier-desc{font-size:12.5px;color:var(--sub);margin-top:2px;}
+  .tier-row .tier-price{font-size:15.5px;font-weight:800;text-align:right;white-space:nowrap;}
+  .tier-row .tier-price small{display:block;font-size:11px;font-weight:600;color:var(--sub);}
+
+  /* ── OS picker ──────────────────────────────────────────────────── */
+  .os-tabs{display:inline-flex;justify-content:center;gap:3px;margin:46px auto 0;flex-wrap:wrap;background:var(--line-soft);border:1px solid var(--line);border-radius:14px;padding:5px;}
+  .os-tab{display:flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:none;background:transparent;font-size:15px;font-weight:700;cursor:pointer;color:var(--sub);transition:all .15s;}
+  .os-tab.active{background:#fff;color:var(--accent-dark);box-shadow:var(--shadow-sm);}
+  .os-tab svg{width:16px;height:16px;}
+  #osTabs{display:flex;justify-content:center;width:100%;}
+  #osTabs .os-tabs, #osTabs{display:flex;}
+
+  .os-panel{display:none;max-width:640px;margin:20px auto 0;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px 28px;text-align:left;box-shadow:var(--shadow-md);}
+  .os-panel.active{display:block;}
+  .os-panel-row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;}
+  .os-panel-file{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:15px;color:var(--ink);font-weight:600;}
+  .os-panel-meta{font-size:13.5px;color:var(--sub);margin-top:5px;}
+  .dl-btn{background:var(--accent);color:#fff;padding:12px 22px;border-radius:11px;font-size:15px;font-weight:700;white-space:nowrap;transition:background .15s,transform .15s;}
+  .dl-btn:hover{background:var(--accent-dark);color:#fff;transform:translateY(-1px);}
+  .alt-list{margin-top:18px;padding-top:16px;border-top:1px dashed var(--line);display:flex;gap:10px;flex-wrap:wrap;}
+  .alt-list a{font-size:13.5px;font-weight:700;color:var(--accent-dark);border:1px solid var(--line);padding:7px 13px;border-radius:9px;transition:border-color .15s;}
+  .alt-list a:hover{border-color:var(--accent);}
+  .note{max-width:640px;margin:20px auto 0;font-size:13.5px;color:var(--sub-soft);text-align:center;}
+
+  section{padding:68px 0;}
+  .section-head{text-align:center;max-width:600px;margin:0 auto 42px;}
+  .section-head .eyebrow{font-size:13px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-dark);margin-bottom:11px;}
+  .section-head h2{font-size:clamp(26px,3.4vw,34px);margin-bottom:11px;}
+  .section-head p{color:var(--sub);font-size:16px;}
+
+  .req-grid,.mod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .req-card,.mod-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;}
+  .req-card h3{font-size:16.5px;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+  .req-card h3 .ic{width:34px;height:34px;border-radius:9px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .req-card svg{width:17px;height:17px;color:var(--accent-dark);}
+  .req-card dl{font-size:14px;color:var(--sub);}
+  .req-card dt{font-weight:700;color:var(--ink);margin-top:11px;padding-top:11px;border-top:1px solid var(--line-soft);}
+  .req-card dt:first-child{margin-top:0;padding-top:0;border-top:none;}
+  .req-card dd{margin:2px 0 0;}
+
+  .mod-card{transition:transform .18s,box-shadow .18s,border-color .18s;position:relative;}
+  .mod-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:transparent;}
+  .mod-card .ic{width:44px;height:44px;border-radius:12px;background:var(--accent-soft);display:flex;align-items:center;justify-content:center;margin-bottom:18px;}
+  .mod-card .ic svg{width:21px;height:21px;color:var(--accent-dark);}
+  .mod-card h4{font-size:17.5px;margin-bottom:9px;}
+  .mod-card p{font-size:14.5px;color:var(--sub);}
+  .mod-note{font-size:12.5px;color:var(--sub-soft);margin-top:18px;text-align:center;}
+
+  .release{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:30px 32px;max-width:760px;margin:0 auto;box-shadow:var(--shadow-sm);}
+  .release .ver{display:flex;align-items:center;gap:11px;margin-bottom:16px;}
+  .release .ver .tag{background:var(--ink);color:#fff;font-size:12.5px;font-weight:800;padding:4px 11px;border-radius:999px;}
+  .release .ver .date{font-size:13.5px;color:var(--sub);}
+  .release ul{list-style:none;font-size:15px;color:var(--sub);}
+  .release li{padding-left:22px;position:relative;margin-bottom:10px;}
+  .release li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:var(--accent);}
+
+  footer{border-top:1px solid var(--line);padding:38px 0;text-align:center;font-size:14px;color:var(--sub);}
+  footer a{font-weight:700;color:var(--ink);}
+  footer .sep{opacity:.4;margin:0 6px;}
+
+  @media (max-width:860px){
+    .req-grid,.mod-grid{grid-template-columns:1fr 1fr;}
+    h1.hero-title{font-size:36px;}
+  }
+  @media (max-width:600px){
+    .req-grid,.mod-grid{grid-template-columns:1fr;}
+    .navlinks a:not(.btn-nav){display:none;}
+    .stack{flex-direction:column;}
+    .lic-row{flex-direction:column;}
+    .hero{padding:56px 0 44px;}
+    section{padding:52px 0;}
+    .lic-tab span.tab-text{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap navbar">
+    <a class="brand heading" href="index.html"><span class="dot"></span>Spifora</a>
+    <nav class="navlinks">
+      <a href="index.html">Home</a>
+      <a href="#modules">What's inside</a>
+      <a href="#requirements">System requirements</a>
+      <a href="#release">Release notes</a>
+      <a class="btn-nav" href="#download">Download</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="download">
+    <div class="wrap">
+      <span class="badge"><span class="pulse"></span>Version 1.0.0 — released 2026-07-22</span>
+      <h1 class="heading hero-title">Download <span class="accentword">Spifora</span> for your desktop</h1>
+      <p class="lead">One installer, the whole back office: Finance, Inventory, Sales, Purchasing, HR &amp; Payroll — running natively, not in a browser tab.</p>
+
+      <a id="primaryDownload" class="primary-cta" href="https://github.com/Ajalsr/Erp/releases/download/v1.0.0/Spifora_1.0.0_x64-setup.exe" download>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+        <span id="primaryLabel">Download for Windows</span>
+      </a>
+      <p class="hero-sub">Detected automatically · or pick a platform below · <b>~62 MB</b> · Free download — one installer for everyone.</p>
+
+      <!-- License box — two tabs: check an existing key, or request one (new
+           key or "I already have one, need more organizations"). Neither tab
+           gates the download above — same installer for everyone. -->
+      <div class="lic-card">
+        <div class="lic-tabs">
+          <button id="tabCheckBtn" class="lic-tab active" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
+            <span class="tab-text">Check your license</span>
+          </button>
+          <button id="tabRequestBtn" class="lic-tab" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z" opacity="0"/><path d="M3 6l9 7 9-7M3 6v12h18V6H3z"/></svg>
+            <span class="tab-text">Request a key</span>
+          </button>
+        </div>
+
+        <div id="panelCheck" class="lic-panel active">
+          <div class="lic-row">
+            <input id="licenseInput" class="lic-input" type="text" placeholder="SPF-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+            <button id="licenseVerifyBtn" class="btn-solid" type="button">Verify</button>
+          </div>
+          <p id="licenseError" class="lic-error" hidden></p>
+          <div id="licenseSummary" class="lic-summary" hidden>
+            <div class="lic-summary-top">
+              <div>
+                <div class="lic-plan" id="licPlan"></div>
+                <div class="lic-customer" id="licCustomer"></div>
+              </div>
+              <div class="lic-usage" id="licUsage"></div>
+            </div>
+            <div class="lic-expiry" id="licExpiry"></div>
+            <div class="lic-modules" id="licModules"></div>
+          </div>
+        </div>
+
+        <div id="panelRequest" class="lic-panel">
+          <label class="upgrade-toggle">
+            <input id="reqIsUpgrade" type="checkbox">
+            I already have a license — I just need more organizations
+          </label>
+
+          <!-- New key: name/email, then plan tier + seats. Requested modules
+               and plan name are derived from the chosen tier, not typed. -->
+          <div id="reqNewFields" style="display:flex;flex-direction:column;gap:10px;">
+            <input id="reqName" class="txt-input" type="text" placeholder="Your name / company">
+            <input id="reqEmail" class="txt-input" type="email" placeholder="Email">
+
+            <div style="margin-top:6px;">
+              <p style="font-size:15px;font-weight:800;margin:0 0 2px;">Choose your plan</p>
+              <p style="font-size:12.5px;color:var(--sub);margin:0 0 12px;">You can upgrade anytime as your team grows.</p>
+            </div>
+
+            <div class="billing-toggle">
+              <button id="billMonthly" class="billing-opt" type="button">Monthly</button>
+              <button id="billAnnual" class="billing-opt active" type="button">Annual <span>save 17%</span></button>
+            </div>
+
+            <div id="tierList" style="display:flex;flex-direction:column;gap:10px;"></div>
+
+            <div>
+              <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Number of users</label>
+              <input id="reqSeats" class="txt-input" type="number" min="1" value="1" style="width:100%;">
+              <p id="seatHint" style="font-size:12.5px;color:var(--sub);margin:6px 0 0;"></p>
+            </div>
+
+            <div>
+              <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Organizations needed</label>
+              <input id="reqOrgs" class="txt-input" type="number" min="1" value="1" style="width:100%;">
+              <p id="orgsHint" style="font-size:12.5px;color:var(--sub);margin:6px 0 0;">Starter and Growth run 1 organization. Need more? Enterprise supports several under one login — common for accounting firms and franchise owners.</p>
+            </div>
+
+            <p id="multiOrgNotice" style="font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0;" hidden>Multiple organizations is an Enterprise, negotiated-price case — we'll follow up by email with pricing before anything is finalized.</p>
+
+            <button id="reqSubmitBtnNew" class="btn-solid" type="button" style="width:100%;">Submit Request</button>
+          </div>
+
+          <!-- Upgrade: only the code field shows first. Everything else
+               (name/email, filled in automatically, + orgs + submit) stays
+               hidden until the code verifies — nothing to fill in blind. -->
+          <div id="reqUpgradeFields" style="display:none;flex-direction:column;gap:10px;">
+            <div class="lic-row">
+              <input id="reqExistingCode" class="lic-input" type="text" placeholder="Your existing license key — SPF-XXXX-XXXX-XXXX" autocomplete="off" spellcheck="false">
+              <button id="reqCheckCodeBtn" class="btn-solid" type="button">Check</button>
+            </div>
+            <p id="reqCodeLoading" style="font-size:12.5px;color:var(--sub);margin:0;" hidden>Checking key…</p>
+
+            <div id="reqUpgradeDetails" style="display:none;flex-direction:column;gap:10px;">
+              <input id="reqUpgradeName" class="txt-input" type="text" disabled style="background:var(--line-soft);color:var(--sub);">
+              <input id="reqUpgradeEmail" class="txt-input" type="email" disabled style="background:var(--line-soft);color:var(--sub);">
+
+              <div>
+                <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Additional organizations (optional)</label>
+                <input id="reqAdditionalOrgs" class="txt-input" type="number" min="0" value="0" style="width:100%;">
+              </div>
+
+              <label class="upgrade-toggle">
+                <input id="reqWantsPlanBump" type="checkbox">
+                Also upgrade my plan for more seats / modules
+              </label>
+
+              <div id="upgradePlanFields" style="display:none;flex-direction:column;gap:10px;">
+                <div class="billing-toggle">
+                  <button id="upgradeBillMonthly" class="billing-opt" type="button">Monthly</button>
+                  <button id="upgradeBillAnnual" class="billing-opt active" type="button">Annual <span>save 17%</span></button>
+                </div>
+                <div id="upgradeTierList" style="display:flex;flex-direction:column;gap:10px;"></div>
+                <div>
+                  <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Number of users</label>
+                  <input id="upgradeSeats" class="txt-input" type="number" min="1" value="1" style="width:100%;">
+                  <p id="upgradeSeatHint" style="font-size:12.5px;color:var(--sub);margin:6px 0 0;"></p>
+                </div>
+              </div>
+
+              <button id="reqSubmitBtnUpgrade" class="btn-solid" type="button" style="width:100%;">Submit Request</button>
+            </div>
+          </div>
+
+          <p id="reqError" class="lic-error" hidden></p>
+          <p id="reqSuccess" class="lic-ok" hidden>Request submitted — you'll hear back once it's reviewed.</p>
+        </div>
+      </div>
+
+      <div class="os-tabs" id="osTabs">
+        <button class="os-tab" data-os="windows">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5L10.5 4.4V11.4H3V5.5M11.5 4.3L21 3V11.3H11.5V4.3M3 12.4H10.5V19.5L3 18.4V12.4M11.5 12.4H21V20.9L11.5 19.6V12.4Z"/></svg>
+          Windows
+        </button>
+        <button class="os-tab" data-os="mac">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.79-.06 2.14-.94 3.65-.85 1.15.09 3.34.5 4.4 2.4-.11.07-2.4 1.35-2.4 4.32.01 3.53 2.87 4.7 2.9 4.71-.05.14-.5 1.51-1.42 2.98-.7 1.06-1.43 2.09-2.21 2.21-.98.15-1.15-.6-2-.6zM12.03 7.25c-.15-2.23 1.66-4.09 3.74-4.25.28 2.49-2.05 4.38-3.74 4.25z"/></svg>
+          macOS
+        </button>
+        <button class="os-tab" data-os="linux">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.62 20.24c-.24-1.42-1.13-1.86-1.73-2.4-.62-.57-.85-1.08-.55-1.66.28-.55 1.03-1.68.72-3.32-.24-1.24-1.29-1.93-2.05-1.93-.76 0-1.8.67-2.05 1.93-.32 1.64.44 2.77.72 3.32.3.58.07 1.09-.55 1.66-.6.54-1.49.98-1.73 2.4-.1.6.28 1.51 1.6 1.51.86 0 1.34-.35 2.01-.35.67 0 1.15.35 2.01.35 1.32 0 1.7-.91 1.6-1.51z"/></svg>
+          Linux
+        </button>
+      </div>
+
+      <div class="os-panel" data-panel="windows">
+        <div class="os-panel-row">
+          <div>
+            <div class="os-panel-file">Spifora_1.0.0_x64-setup.exe</div>
+            <div class="os-panel-meta">NSIS installer · x64 · Windows 10 (64-bit) or later · 15.2 MB</div>
+          </div>
+          <a class="dl-btn" href="https://github.com/Ajalsr/Erp/releases/download/v1.0.0/Spifora_1.0.0_x64-setup.exe" download>Download .exe</a>
+        </div>
+        <div class="alt-list">
+          <a href="https://github.com/Ajalsr/Erp/releases/download/v1.0.0/Spifora_1.0.0_x64_en-US.msi" download>MSI installer (.msi) &middot; 18.0 MB</a>
+        </div>
+      </div>
+
+      <div class="os-panel" data-panel="mac">
+        <div class="os-panel-row">
+          <div>
+            <div class="os-panel-file">Coming soon</div>
+            <div class="os-panel-meta">macOS build hasn't been produced yet — Tauri builds on macOS itself, not cross-compiled from this Windows machine.</div>
+          </div>
+          <span class="dl-btn" style="opacity:.45;cursor:not-allowed;pointer-events:none;">Not available yet</span>
+        </div>
+      </div>
+
+      <div class="os-panel" data-panel="linux">
+        <div class="os-panel-row">
+          <div>
+            <div class="os-panel-file">Coming soon</div>
+            <div class="os-panel-meta">Linux build hasn't been produced yet — needs a Linux (or CI) build machine.</div>
+          </div>
+          <span class="dl-btn" style="opacity:.45;cursor:not-allowed;pointer-events:none;">Not available yet</span>
+        </div>
+      </div>
+
+      <p class="note">Installers are hosted as <a href="https://github.com/Ajalsr/Erp/releases/tag/v1.0.0" style="color:var(--accent-dark);font-weight:700;">GitHub Release v1.0.0</a> assets — links go live once that release exists with these exact filenames attached.</p>
+    </div>
+  </section>
+
+  <section id="requirements">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">System details</div>
+        <h2 class="heading">What it takes to run Spifora</h2>
+        <p>A native desktop shell (Tauri) around the same Spifora backend — lightweight footprint, no browser required.</p>
+      </div>
+      <div class="req-grid">
+        <div class="req-card">
+          <h3><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 5.5L10.5 4.4V11.4H3V5.5M11.5 4.3L21 3V11.3H11.5V4.3M3 12.4H10.5V19.5L3 18.4V12.4M11.5 12.4H21V20.9L11.5 19.6V12.4Z"/></svg></span>Windows</h3>
+          <dl>
+            <dt>OS</dt><dd>Windows 10 (64-bit) or later, Windows 11</dd>
+            <dt>Processor</dt><dd>64-bit (x64)</dd>
+            <dt>Memory</dt><dd>4 GB RAM minimum, 8 GB recommended</dd>
+            <dt>Disk</dt><dd>250 MB free space</dd>
+            <dt>Network</dt><dd>Internet connection required</dd>
+          </dl>
+        </div>
+        <div class="req-card">
+          <h3><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.79-.06 2.14-.94 3.65-.85 1.15.09 3.34.5 4.4 2.4-.11.07-2.4 1.35-2.4 4.32.01 3.53 2.87 4.7 2.9 4.71-.05.14-.5 1.51-1.42 2.98-.7 1.06-1.43 2.09-2.21 2.21-.98.15-1.15-.6-2-.6zM12.03 7.25c-.15-2.23 1.66-4.09 3.74-4.25.28 2.49-2.05 4.38-3.74 4.25z"/></svg></span>macOS</h3>
+          <dl>
+            <dt>OS</dt><dd>macOS 12 Monterey or later</dd>
+            <dt>Processor</dt><dd>Apple Silicon or Intel</dd>
+            <dt>Memory</dt><dd>4 GB RAM minimum, 8 GB recommended</dd>
+            <dt>Disk</dt><dd>250 MB free space</dd>
+            <dt>Network</dt><dd>Internet connection required</dd>
+          </dl>
+        </div>
+        <div class="req-card">
+          <h3><span class="ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.62 20.24c-.24-1.42-1.13-1.86-1.73-2.4-.62-.57-.85-1.08-.55-1.66.28-.55 1.03-1.68.72-3.32-.24-1.24-1.29-1.93-2.05-1.93-.76 0-1.8.67-2.05 1.93-.32 1.64.44 2.77.72 3.32.3.58.07 1.09-.55 1.66-.6.54-1.49.98-1.73 2.4-.1.6.28 1.51 1.6 1.51.86 0 1.34-.35 2.01-.35.67 0 1.15.35 2.01.35 1.32 0 1.7-.91 1.6-1.51z"/></svg></span>Linux</h3>
+          <dl>
+            <dt>Distro</dt><dd>Debian/Ubuntu, Fedora/RHEL, or any AppImage-capable distro</dd>
+            <dt>Processor</dt><dd>x86_64</dd>
+            <dt>Memory</dt><dd>4 GB RAM minimum, 8 GB recommended</dd>
+            <dt>Disk</dt><dd>250 MB free space</dd>
+            <dt>Network</dt><dd>Internet connection required</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="modules" style="background:#fff;border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Inside the app</div>
+        <h2 class="heading">Everything the desktop client runs</h2>
+        <p>Spifora is one binary talking to one backend — every module below ships in the same download. Which ones your organization can actually use is set by your license key, chosen when the organization is created.</p>
+      </div>
+      <div class="mod-grid">
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 8l-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8"/></svg></div>
+          <h4>Inventory</h4>
+          <p>Items, warehouses, stock adjustments and valuation, kept in sync with every sale and purchase.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3h2l2.6 13.4a2 2 0 002 1.6h9a2 2 0 002-1.6L22 6H6"/></svg></div>
+          <h4>Sales</h4>
+          <p>Quotes, sales orders, invoices, credit notes and payments received — all traceable to one customer.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 7h-9M14 17H5M17 3l3 4-3 4M7 21l-3-4 3-4"/></svg></div>
+          <h4>Purchasing</h4>
+          <p>Purchase orders, vendor bills, GRNs, vendor credits and payments made.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+          <h4>Finance</h4>
+          <p>Chart of accounts, journal entries, bank reconciliation, multi-currency, VAT and financial reports.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg></div>
+          <h4>Reports &amp; Dashboard</h4>
+          <p>Sales, purchase, inventory, aging, VAT and financial-statement reports plus the live dashboard.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h4>HR &amp; Payroll</h4>
+          <p>Employee directory, org chart, salary structures, pay runs with GL posting, payslips, and paid/unpaid time-off with manager approval.</p>
+        </div>
+      </div>
+      <p class="mod-note">Role-based access control (who on your team can do what) is built into every plan — it's not a module, it applies regardless.</p>
+    </div>
+  </section>
+
+  <section id="release">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Changelog</div>
+        <h2 class="heading">Release notes</h2>
+      </div>
+      <div class="release">
+        <div class="ver"><span class="tag">v1.0.0</span><span class="date">Initial release</span></div>
+        <ul>
+          <li>Finance, Inventory, Sales, Purchasing and Reports modules</li>
+          <li>Employee directory and auto-generated org chart</li>
+          <li>Payroll: salary structures, pay runs with GL posting, payslip PDFs and email</li>
+          <li>Recurring payroll schedules (weekly / biweekly / monthly / yearly), always landing as a draft for manual review</li>
+          <li>Time-off: leave types, balances, manager-approval requests, and paid vs. unpaid leave proration on payslips</li>
+          <li>Role-based access control across every module</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>© 2026 Spifora. <a href="index.html">Back to spifora.com</a><span class="sep">·</span><a href="admin-licenses.html" style="opacity:.5;">License admin</a></p>
+  </div>
+</footer>
+
+<script>
+  // Real backend base URL — every dynamic bit on this static page (license
+  // verify, self-serve request) talks to this. Update if the backend moves.
+  var API_BASE = 'http://localhost:8080';
+
+  var MODULE_LABELS = {
+    items:'Items', item_groups:'Item Groups', price_lists:'Price Lists', warehouses:'Warehouses',
+    adjustments:'Stock Adjustments', grns:'GRNs', customers:'Customers', enquiries:'Enquiries',
+    quotes:'Quotes', sales_orders:'Sales Orders', delivery_notes:'Delivery Notes', invoices:'Invoices',
+    credit_notes:'Credit Notes', letters:'Letters', vendors:'Vendors', purchase_orders:'Purchase Orders',
+    bills:'Bills', debit_notes:'Debit Notes', vendor_credits:'Vendor Credits', accounts:'Accounts',
+    journal_entries:'Journal Entries', payments:'Payments Received', vendor_payments:'Payments Made',
+    advance_payments:'Advance Payments', reports:'Reports', dashboard:'Dashboard',
+    employees:'Employees', payroll:'Payroll', timeoff:'Time Off'
+  };
+
+  // ── OS tabs — purely cosmetic, no gating. Same installer for everyone.
+  var OS_HREF      = { windows: 'https://github.com/Ajalsr/Erp/releases/download/v1.0.0/Spifora_1.0.0_x64-setup.exe', mac: '#osTabs', linux: '#osTabs' };
+  var OS_AVAILABLE = { windows: true, mac: false, linux: false };
+  var OS_LABEL     = { windows: 'Download for Windows', mac: 'macOS — coming soon', linux: 'Linux — coming soon' };
+
+  function detectOS(){
+    var p = (navigator.platform || '').toLowerCase();
+    var ua = (navigator.userAgent || '').toLowerCase();
+    if (p.indexOf('mac') !== -1) return 'mac';
+    if (p.indexOf('win') !== -1) return 'windows';
+    if (ua.indexOf('linux') !== -1) return 'linux';
+    return 'windows';
+  }
+  function setOS(os){
+    document.querySelectorAll('.os-tab').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-os') === os);
+    });
+    document.querySelectorAll('.os-panel').forEach(function(panel){
+      panel.classList.toggle('active', panel.getAttribute('data-panel') === os);
+    });
+    var primary = document.getElementById('primaryDownload');
+    var label = document.getElementById('primaryLabel');
+    if (primary) {
+      primary.setAttribute('href', OS_HREF[os]);
+      if (OS_AVAILABLE[os]) primary.setAttribute('download', ''); else primary.removeAttribute('download');
+    }
+    if (label) label.textContent = OS_LABEL[os];
+  }
+  document.querySelectorAll('.os-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){ setOS(btn.getAttribute('data-os')); });
+  });
+  setOS(detectOS());
+
+  // ── License card tabs ─────────────────────────────────────────────
+  var tabCheckBtn = document.getElementById('tabCheckBtn');
+  var tabRequestBtn = document.getElementById('tabRequestBtn');
+  var panelCheck = document.getElementById('panelCheck');
+  var panelRequest = document.getElementById('panelRequest');
+  function setLicTab(tab){
+    var check = tab === 'check';
+    tabCheckBtn.classList.toggle('active', check);
+    tabRequestBtn.classList.toggle('active', !check);
+    panelCheck.classList.toggle('active', check);
+    panelRequest.classList.toggle('active', !check);
+  }
+  tabCheckBtn.addEventListener('click', function(){ setLicTab('check'); });
+  tabRequestBtn.addEventListener('click', function(){ setLicTab('request'); });
+
+  // ── Check your license — informational, not a gate.
+  var input = document.getElementById('licenseInput');
+  var verifyBtn = document.getElementById('licenseVerifyBtn');
+  var errorEl = document.getElementById('licenseError');
+  var summaryEl = document.getElementById('licenseSummary');
+
+  function showError(msg){
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+    summaryEl.hidden = true;
+  }
+
+  async function verifyLicense(){
+    var key = (input.value || '').trim();
+    if (!key) { showError('Enter a license key'); return; }
+    verifyBtn.disabled = true;
+    verifyBtn.textContent = 'Checking…';
+    errorEl.hidden = true;
+    try {
+      var res = await fetch(API_BASE + '/api/license/verify?key=' + encodeURIComponent(key));
+      var body = await res.json();
+      if (!res.ok) { showError(body.message || 'License key not found'); return; }
+      var data = body.data;
+      if (data.status !== 'active') { showError('This license key is ' + data.status); return; }
+
+      document.getElementById('licPlan').textContent = data.planName || 'Plan';
+      document.getElementById('licCustomer').textContent = data.customerName || '';
+      var usage = document.getElementById('licUsage');
+      var atCap = data.orgsUsed >= data.maxOrganizations;
+      usage.textContent = data.orgsUsed + ' of ' + data.maxOrganizations + ' organizations used';
+      usage.className = 'lic-usage ' + (atCap ? 'full' : 'ok');
+      document.getElementById('licExpiry').textContent = data.expiresAt
+        ? 'Expires ' + new Date(data.expiresAt).toLocaleDateString()
+        : 'No expiry';
+      var modulesEl = document.getElementById('licModules');
+      modulesEl.innerHTML = '';
+      (data.allowedModules || []).forEach(function(m){
+        var span = document.createElement('span');
+        span.className = 'lic-badge';
+        span.textContent = MODULE_LABELS[m] || m;
+        modulesEl.appendChild(span);
+      });
+
+      summaryEl.hidden = false;
+      errorEl.hidden = true;
+      if (atCap) showError('This key\'s organization limit has been reached — contact whoever issued it if you need another organization.');
+    } catch (e) {
+      showError('Could not reach the license server — try again in a moment.');
+    } finally {
+      verifyBtn.disabled = false;
+      verifyBtn.textContent = 'Verify';
+    }
+  }
+  verifyBtn.addEventListener('click', verifyLicense);
+  input.addEventListener('keydown', function(e){ if (e.key === 'Enter') verifyLicense(); });
+
+  // Auto-fill + auto-verify + switch to Check tab if a key was passed via ?key=...
+  var qsKey = new URLSearchParams(window.location.search).get('key');
+  if (qsKey) {
+    input.value = qsKey;
+    verifyLicense();
+  }
+
+  // ── Request a key — self-serve. New key, or upgrade an existing one.
+  var MODULE_GROUPS = {
+    'Inventory':   ['items','item_groups','price_lists','warehouses','adjustments','grns'],
+    'Sales':       ['customers','enquiries','quotes','sales_orders','delivery_notes','invoices','credit_notes','letters'],
+    'Purchases':   ['vendors','purchase_orders','bills','debit_notes','vendor_credits'],
+    'Finance':     ['accounts','journal_entries','payments','vendor_payments','advance_payments'],
+    'Reports':     ['reports','dashboard'],
+    'HR':          ['employees','payroll','timeoff']
+  };
+
+  // Fixed plan tiers — maxUsers is a ceiling only (0 = unlimited), enforced
+  // server-side per-org by InviteMember; price is illustrative, no billing
+  // is actually wired up yet. Modules for each tier build on the one before.
+  var PLAN_TIERS = [
+    {
+      key: 'starter', name: 'Starter', maxUsers: 5, annualPrice: 1490,
+      desc: 'Sales · Inventory · Accounting/VAT · up to 5 users',
+      groups: ['Sales', 'Inventory', 'Finance']
+    },
+    {
+      key: 'growth', name: 'Growth', maxUsers: 15, annualPrice: 1990,
+      desc: '+ Purchase · HR · up to 15 users',
+      groups: ['Sales', 'Inventory', 'Finance', 'Purchases', 'HR']
+    },
+    {
+      key: 'enterprise', name: 'Enterprise', maxUsers: 0, annualPrice: null,
+      desc: '+ Reports · priority support · unlimited users',
+      groups: ['Sales', 'Inventory', 'Finance', 'Purchases', 'HR', 'Reports']
+    }
+  ];
+  function tierModules(tier){
+    var mods = [];
+    tier.groups.forEach(function(g){ MODULE_GROUPS[g].forEach(function(m){ if (mods.indexOf(m) === -1) mods.push(m); }); });
+    return mods;
+  }
+
+  // Generic tier-list renderer + seat-limit hint, parameterized so the same
+  // picker works both for a fresh-key request and for "upgrade my existing
+  // key's plan" — two independent selections/billing toggles, same widget.
+  function makeTierPicker(opts){
+    var state = { tierKey: opts.defaultTier || 'starter', billingAnnual: true };
+
+    function fmtPrice(tier){
+      if (tier.annualPrice == null) return { main: 'Custom', sub: 'contact sales' };
+      var price = state.billingAnnual ? tier.annualPrice : Math.round(tier.annualPrice / 12 / 0.83);
+      return { main: 'AED ' + price.toLocaleString(), sub: state.billingAnnual ? '/user/yr' : '/user/mo' };
+    }
+
+    function currentTier(){ return PLAN_TIERS.find(function(t){ return t.key === state.tierKey; }); }
+
+    function renderTiers(){
+      opts.listEl.innerHTML = '';
+      PLAN_TIERS.forEach(function(tier){
+        var price = fmtPrice(tier);
+        var row = document.createElement('div');
+        row.className = 'tier-row' + (tier.key === state.tierKey ? ' selected' : '');
+        row.innerHTML =
+          '<div><div class="tier-name">' + tier.name + '</div><div class="tier-desc">' + tier.desc + '</div></div>' +
+          '<div class="tier-price">' + price.main + '<small>' + price.sub + '</small></div>';
+        row.addEventListener('click', function(){ selectTier(tier.key); });
+        opts.listEl.appendChild(row);
+      });
+    }
+
+    function renderSeatHint(){
+      var seats = parseInt(opts.seatsEl.value, 10) || 0;
+      var tier = currentTier();
+      var linkId = opts.hintEl.id + 'Link';
+      if (tier.maxUsers > 0 && seats > tier.maxUsers) {
+        var next = PLAN_TIERS[PLAN_TIERS.indexOf(tier) + 1];
+        opts.hintEl.innerHTML = seats + ' exceeds ' + tier.name + '\'s ' + tier.maxUsers + '-user limit — '
+          + (next ? '<a href="#" id="' + linkId + '" style="font-weight:700;">upgrade to ' + next.name + '</a> for more seats.' : 'contact sales for more seats.');
+        opts.hintEl.style.color = '#dc2626';
+        var link = document.getElementById(linkId);
+        if (link) link.addEventListener('click', function(e){ e.preventDefault(); selectTier(next.key); });
+        if (opts.onValidChange) opts.onValidChange(false);
+        return;
+      }
+      opts.hintEl.textContent = tier.maxUsers > 0 ? ('max ' + tier.maxUsers + ' users on ' + tier.name) : ('unlimited users on ' + tier.name);
+      opts.hintEl.style.color = 'var(--sub)';
+      if (opts.onValidChange) opts.onValidChange(true);
+    }
+
+    function selectTier(key){
+      state.tierKey = key;
+      renderTiers();
+      renderSeatHint();
+      if (opts.onTierSelect) opts.onTierSelect(key);
+    }
+
+    opts.billMonthlyEl.addEventListener('click', function(){ state.billingAnnual = false; opts.billMonthlyEl.classList.add('active'); opts.billAnnualEl.classList.remove('active'); renderTiers(); });
+    opts.billAnnualEl.addEventListener('click', function(){ state.billingAnnual = true; opts.billAnnualEl.classList.add('active'); opts.billMonthlyEl.classList.remove('active'); renderTiers(); });
+    opts.seatsEl.addEventListener('input', renderSeatHint);
+
+    return {
+      render: function(){ renderTiers(); renderSeatHint(); },
+      currentTier: currentTier,
+      seats: function(){ return parseInt(opts.seatsEl.value, 10) || 1; },
+      select: selectTier
+    };
+  }
+
+  var reqSubmitBtnNew = document.getElementById('reqSubmitBtnNew');
+  var reqSubmitBtnUpgrade = document.getElementById('reqSubmitBtnUpgrade');
+
+  // Starter/Growth are single-org SME tiers — no self-serve path for more
+  // than 1. Asking for more auto-switches to Enterprise (negotiated,
+  // contact-sales) instead of silently accepting a number those tiers
+  // don't support; mirrors the same rule RequestLicense enforces server-side.
+  // Switching back away from Enterprise clamps orgs back down to 1 too, so
+  // the two fields can never disagree with each other.
+  var reqOrgsEl = document.getElementById('reqOrgs');
+  var multiOrgNotice = document.getElementById('multiOrgNotice');
+
+  var newTierPicker = makeTierPicker({
+    listEl: document.getElementById('tierList'),
+    seatsEl: document.getElementById('reqSeats'),
+    hintEl: document.getElementById('seatHint'),
+    billMonthlyEl: document.getElementById('billMonthly'),
+    billAnnualEl: document.getElementById('billAnnual'),
+    onValidChange: function(valid){ reqSubmitBtnNew.disabled = !valid; },
+    onTierSelect: function(key){
+      if (key !== 'enterprise') {
+        reqOrgsEl.value = 1;
+        multiOrgNotice.hidden = true;
+      }
+    }
+  });
+  newTierPicker.render();
+
+  reqOrgsEl.addEventListener('input', function(){
+    var orgs = parseInt(reqOrgsEl.value, 10) || 1;
+    var tier = newTierPicker.currentTier();
+    if (orgs > 1 && tier.key !== 'enterprise') {
+      newTierPicker.select('enterprise');
+    }
+    multiOrgNotice.hidden = orgs <= 1;
+  });
+
+  var upgradeTierPicker = makeTierPicker({
+    listEl: document.getElementById('upgradeTierList'),
+    seatsEl: document.getElementById('upgradeSeats'),
+    hintEl: document.getElementById('upgradeSeatHint'),
+    billMonthlyEl: document.getElementById('upgradeBillMonthly'),
+    billAnnualEl: document.getElementById('upgradeBillAnnual'),
+    defaultTier: 'growth', // suggesting the next tier up is the common case for an upgrade
+    onValidChange: function(valid){ reqSubmitBtnUpgrade.disabled = !valid; }
+  });
+  upgradeTierPicker.render();
+
+  var reqWantsPlanBump = document.getElementById('reqWantsPlanBump');
+  var upgradePlanFields = document.getElementById('upgradePlanFields');
+  reqWantsPlanBump.addEventListener('change', function(){
+    var on = reqWantsPlanBump.checked;
+    upgradePlanFields.style.display = on ? 'flex' : 'none';
+    if (!on) reqSubmitBtnUpgrade.disabled = false; // plan section hidden — its validity no longer blocks submit
+    else upgradeTierPicker.render(); // re-check seat/tier validity now that it's back in play
+  });
+  var reqError = document.getElementById('reqError');
+  var reqSuccess = document.getElementById('reqSuccess');
+  var reqIsUpgrade = document.getElementById('reqIsUpgrade');
+  var reqNewFields = document.getElementById('reqNewFields');
+  var reqUpgradeFields = document.getElementById('reqUpgradeFields');
+  var reqCodeLoading = document.getElementById('reqCodeLoading');
+  var reqUpgradeDetails = document.getElementById('reqUpgradeDetails');
+  var reqUpgradeName = document.getElementById('reqUpgradeName');
+  var reqUpgradeEmail = document.getElementById('reqUpgradeEmail');
+
+  function showReqError(msg){ reqError.textContent = msg; reqError.hidden = false; }
+
+  function resetUpgradeDetails(){
+    reqUpgradeDetails.style.display = 'none';
+    reqCodeLoading.hidden = true;
+    reqUpgradeName.value = '';
+    reqUpgradeEmail.value = '';
+  }
+
+  reqIsUpgrade.addEventListener('change', function(){
+    var on = reqIsUpgrade.checked;
+    reqNewFields.style.display = on ? 'none' : 'flex';
+    reqUpgradeFields.style.display = on ? 'flex' : 'none';
+    reqError.hidden = true;
+    if (!on) { document.getElementById('reqExistingCode').value = ''; resetUpgradeDetails(); }
+  });
+
+  // Only the code field shows at first — everything else (name/email fetched
+  // from the license, orgs, submit) stays hidden behind a loader until the
+  // code actually verifies. Re-editing the code after a successful check
+  // hides the revealed fields again so stale details never linger.
+  var reqExistingCode = document.getElementById('reqExistingCode');
+  var reqCheckCodeBtn = document.getElementById('reqCheckCodeBtn');
+  reqExistingCode.addEventListener('input', resetUpgradeDetails);
+
+  async function autofillFromCode(){
+    var code = (reqExistingCode.value || '').trim();
+    reqError.hidden = true;
+    resetUpgradeDetails();
+    if (!code) return;
+    reqExistingCode.disabled = true;
+    reqCheckCodeBtn.disabled = true;
+    reqCheckCodeBtn.textContent = 'Checking…';
+    reqCodeLoading.hidden = false;
+    try {
+      var res = await fetch(API_BASE + '/api/license/verify?key=' + encodeURIComponent(code));
+      var body = await res.json();
+      if (!res.ok) { showReqError(body.message || 'License key not found'); return; }
+      var data = body.data;
+      if (data.status !== 'active') { showReqError('This license is ' + data.status); return; }
+      reqUpgradeName.value = data.customerName || '';
+      reqUpgradeEmail.value = data.customerEmail || '';
+      reqUpgradeDetails.style.display = 'flex';
+    } catch (e) {
+      showReqError('Could not reach the license server — try again in a moment.');
+    } finally {
+      reqExistingCode.disabled = false;
+      reqCheckCodeBtn.disabled = false;
+      reqCheckCodeBtn.textContent = 'Check';
+      reqCodeLoading.hidden = true;
+    }
+  }
+  reqExistingCode.addEventListener('blur', autofillFromCode);
+  reqExistingCode.addEventListener('keydown', function(e){ if (e.key === 'Enter') autofillFromCode(); });
+  reqCheckCodeBtn.addEventListener('click', autofillFromCode);
+
+  async function submitRequest(){
+    var isUpgrade = reqIsUpgrade.checked;
+    var name = ((isUpgrade ? reqUpgradeName.value : document.getElementById('reqName').value) || '').trim();
+    var email = ((isUpgrade ? reqUpgradeEmail.value : document.getElementById('reqEmail').value) || '').trim();
+    reqError.hidden = true;
+    if (!name) { showReqError('Enter your name / company'); return; }
+    if (!email) { showReqError('Enter your email'); return; }
+
+    var payload = { customerName: name, customerEmail: email };
+    var activeBtn;
+    if (isUpgrade) {
+      var code = (document.getElementById('reqExistingCode').value || '').trim();
+      var addOrgs = parseInt(document.getElementById('reqAdditionalOrgs').value, 10) || 0;
+      if (!code) { showReqError('Enter your existing license key'); return; }
+      payload.upgradeForCode = code;
+      if (addOrgs > 0) payload.additionalOrganizations = addOrgs;
+
+      var wantsPlanBump = reqWantsPlanBump.checked;
+      if (wantsPlanBump) {
+        var uTier = upgradeTierPicker.currentTier();
+        var uSeats = upgradeTierPicker.seats();
+        if (uTier.maxUsers > 0 && uSeats > uTier.maxUsers) { showReqError('Reduce seats or pick a higher tier first'); return; }
+        payload.planName = uTier.name;
+        payload.planTier = uTier.key;
+        payload.requestedModules = tierModules(uTier);
+        payload.requestedMaxUsers = uSeats;
+      }
+      if (addOrgs === 0 && !wantsPlanBump) { showReqError('Add more organizations, or check the plan-upgrade box, before submitting'); return; }
+      activeBtn = reqSubmitBtnUpgrade;
+    } else {
+      var tier = newTierPicker.currentTier();
+      var seats = newTierPicker.seats();
+      var orgs = parseInt(document.getElementById('reqOrgs').value, 10) || 1;
+      if (tier.maxUsers > 0 && seats > tier.maxUsers) { showReqError('Reduce seats or upgrade your plan first'); return; }
+      payload.planName = tier.name;
+      payload.planTier = tier.key;
+      payload.maxOrganizations = orgs;
+      payload.requestedModules = tierModules(tier);
+      payload.requestedMaxUsers = seats;
+      activeBtn = reqSubmitBtnNew;
+    }
+
+    activeBtn.disabled = true;
+    activeBtn.textContent = 'Submitting…';
+    try {
+      var res = await fetch(API_BASE + '/api/license/request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var body = await res.json();
+      if (!res.ok) { showReqError(body.message || 'Failed to submit request'); return; }
+      reqSuccess.hidden = false;
+      document.getElementById('reqName').value = '';
+      document.getElementById('reqEmail').value = '';
+      document.getElementById('reqExistingCode').value = '';
+      resetUpgradeDetails();
+    } catch (e) {
+      showReqError('Could not reach the license server — try again in a moment.');
+    } finally {
+      activeBtn.disabled = false;
+      activeBtn.textContent = 'Submit Request';
+    }
+  }
+  reqSubmitBtnNew.addEventListener('click', submitRequest);
+  reqSubmitBtnUpgrade.addEventListener('click', submitRequest);
+</script>
+
+</body>
+</html>

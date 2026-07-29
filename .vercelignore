@@ -1,0 +1,8 @@
+# This project (Spifora-site root) is the static marketing/download site +
+# the invitation hand-off page — deployed to spifora.com.
+#
+# public-viewer/ is a SEPARATE React app deployed as its OWN Vercel project
+# (its own subdomain, e.g. view.spifora.com — see public-viewer/README.md).
+# Excluded here so this project doesn't ship its source/node_modules/dist.
+public-viewer
+downloads/README.txt

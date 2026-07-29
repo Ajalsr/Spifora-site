@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>License Admin — Spifora</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0f1e;color:#e2e8f0;}
+  input,button{font-family:inherit;}
+  table{border-collapse:collapse;width:100%;font-size:12.5px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+
+  /* Unlock screen */
+  #unlockScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;}
+  .unlock-card{width:360px;max-width:92vw;background:rgba(15,23,42,0.97);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:28px;}
+  .unlock-card input{width:100%;height:42px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f1f5f9;font-size:13px;outline:none;margin-bottom:12px;box-sizing:border-box;}
+  .btn-primary{padding:11px;border-radius:10px;background:#2563eb;color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;width:100%;}
+  .btn-primary:disabled{opacity:.6;cursor:not-allowed;}
+
+  /* Main page */
+  #mainScreen{display:none;padding:28px 32px;max-width:1400px;margin:0 auto;}
+  .header-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;}
+  .header-row h1{font-size:20px;font-weight:800;margin:0;color:#f1f5f9;}
+  .header-row p{font-size:12px;color:#64748b;margin:4px 0 0;}
+  .tabs{display:flex;gap:8px;margin-bottom:16px;}
+  .tab-btn{padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:#94a3b8;}
+  .tab-btn.active{border-color:rgba(37,99,235,0.4);background:rgba(37,99,235,0.15);color:#93c5fd;}
+  .table-card{background:rgba(15,23,42,0.7);border:1px solid rgba(255,255,255,0.08);border-radius:14px;overflow:hidden;overflow-x:auto;}
+  th{text-align:left;padding:10px 14px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#64748b;background:rgba(255,255,255,0.03);white-space:nowrap;}
+  td{padding:10px 14px;border-top:1px solid rgba(255,255,255,0.06);vertical-align:top;}
+  .badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;text-transform:capitalize;white-space:nowrap;}
+  .act-btn{padding:5px 10px;border-radius:7px;font-size:11px;font-weight:700;cursor:pointer;border:1px solid;}
+  .act-approve{background:rgba(16,185,129,0.15);color:#34d399;border-color:rgba(16,185,129,0.3);}
+  .act-reject{background:rgba(239,68,68,0.15);color:#f87171;border-color:rgba(239,68,68,0.3);}
+  .act-btn:disabled{cursor:not-allowed;opacity:.6;}
+
+  /* Drawer / modal */
+  .overlay{position:fixed;inset:0;z-index:200;display:none;}
+  .overlay.open{display:flex;}
+  .overlay-bg{position:absolute;inset:0;background:rgba(0,0,0,0.5);}
+  .drawer{position:relative;width:420px;max-width:92vw;height:100%;background:#0f172a;border-left:1px solid rgba(255,255,255,0.08);padding:24px;overflow-y:auto;margin-left:auto;}
+  .drawer h2{font-size:16px;font-weight:700;margin:0 0 20px;color:#f1f5f9;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;color:#64748b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+  .field input{width:100%;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f1f5f9;font-size:13px;outline:none;box-sizing:border-box;}
+  .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+  .grp-name{color:#475569;font-size:11px;font-weight:700;margin:0 0 6px;}
+  .mod-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  .mod-check{display:flex;align-items:center;gap:7px;padding:6px 8px;border-radius:7px;background:rgba(255,255,255,0.03);cursor:pointer;font-size:12px;color:#cbd5e1;}
+
+  .modal-center{align-items:center;justify-content:center;}
+  .modal-box{width:420px;max-width:92vw;background:#0f172a;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:26px;position:relative;}
+  .modal-box h2{font-size:16px;font-weight:700;margin:0 0 4px;color:#f1f5f9;}
+  .code-row{display:flex;gap:8px;margin:18px 0;}
+  .code-row code{flex:1;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:#93c5fd;font-size:15px;font-weight:700;letter-spacing:.03em;}
+  .btn-ghost{padding:0 16px;border-radius:10px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:#e2e8f0;font-size:12px;font-weight:700;cursor:pointer;}
+
+  .toast{position:fixed;top:20px;right:20px;z-index:400;display:flex;flex-direction:column;gap:8px;}
+  .toast-item{padding:12px 16px;border-radius:10px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 8px 20px rgba(0,0,0,.3);animation:toastIn .2s ease;}
+  .toast-item.ok{background:#059669;}
+  .toast-item.err{background:#dc2626;}
+  @keyframes toastIn{from{opacity:0;transform:translateY(-8px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<div id="toastHost" class="toast"></div>
+
+<div id="unlockScreen">
+  <div class="unlock-card">
+    <p style="color:#f1f5f9;font-size:16px;font-weight:700;margin:0 0 4px;">License Admin</p>
+    <p style="color:#64748b;font-size:12px;margin:0 0 18px;">Enter the ADMIN_SECRET to continue.</p>
+    <input id="secretInput" type="password" placeholder="Admin secret" autocomplete="off" autofocus>
+    <button id="unlockBtn" class="btn-primary">Unlock</button>
+  </div>
+</div>
+
+<div id="mainScreen">
+  <div class="header-row">
+    <div>
+      <h1>License Keys</h1>
+      <p id="countLine">0 total · 0 pending review</p>
+    </div>
+    <button id="newLicenseBtn" class="btn-primary" style="width:auto;padding:10px 18px;">+ New License</button>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="pending" id="tabPending">Pending (0)</button>
+    <button class="tab-btn" data-tab="all" id="tabAll">All</button>
+  </div>
+
+  <div class="table-card">
+    <table>
+      <thead>
+        <tr>
+          <th>Code</th><th>Customer</th><th>Plan</th><th>Orgs</th><th>Users</th><th>Modules</th><th>Status</th><th>Expires</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="rowsBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- New License drawer -->
+<div id="drawerOverlay" class="overlay">
+  <div class="overlay-bg" id="drawerBg"></div>
+  <div class="drawer">
+    <h2>New License</h2>
+    <div class="field"><label>Customer Name *</label><input id="nlName"></div>
+    <div class="field"><label>Customer Email</label><input id="nlEmail"></div>
+    <div class="field-row">
+      <div><label style="display:block;color:#64748b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Plan Name</label><input id="nlPlan" class="field-input" placeholder="Business" style="width:100%;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f1f5f9;font-size:13px;outline:none;box-sizing:border-box;"></div>
+      <div><label style="display:block;color:#64748b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;">Max Organizations</label><input id="nlOrgs" type="number" min="1" value="1" style="width:100%;height:40px;padding:0 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.05);color:#f1f5f9;font-size:13px;outline:none;box-sizing:border-box;"></div>
+    </div>
+    <div class="field"><label>Max Users / Org (blank = unlimited)</label><input id="nlMaxUsers" type="number" min="1"></div>
+    <div class="field"><label>Expires (optional)</label><input id="nlExpires" type="date"></div>
+    <label style="display:block;color:#64748b;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;">Allowed Modules *</label>
+    <div id="nlModuleGroups"></div>
+    <button id="nlSubmitBtn" class="btn-primary" style="margin-top:8px;">Create License</button>
+  </div>
+</div>
+
+<!-- Just-created / code modal -->
+<div id="codeOverlay" class="overlay modal-center">
+  <div class="overlay-bg"></div>
+  <div class="modal-box">
+    <h2 id="codeModalTitle">License created</h2>
+    <p style="color:#f59e0b;font-size:12px;margin:0 0 4px;">This code is shown once — copy it now. There's no way to retrieve it again later.</p>
+    <div class="code-row">
+      <code id="codeModalValue"></code>
+      <button id="codeCopyBtn" class="btn-ghost">Copy</button>
+    </div>
+    <button id="codeDoneBtn" class="btn-primary">Done</button>
+  </div>
+</div>
+
+<script>
+  var API_BASE = 'http://localhost:8080';
+  var SECRET_KEY = 'nx_admin_secret';
+
+  var MODULE_LABELS = {
+    items:'Items', item_groups:'Item Groups', price_lists:'Price Lists', warehouses:'Warehouses',
+    adjustments:'Stock Adjustments', grns:'GRNs', customers:'Customers', enquiries:'Enquiries',
+    quotes:'Quotes', sales_orders:'Sales Orders', delivery_notes:'Delivery Notes', invoices:'Invoices',
+    credit_notes:'Credit Notes', letters:'Letters', vendors:'Vendors', purchase_orders:'Purchase Orders',
+    bills:'Bills', debit_notes:'Debit Notes', vendor_credits:'Vendor Credits', accounts:'Accounts',
+    journal_entries:'Journal Entries', payments:'Payments Received', vendor_payments:'Payments Made',
+    advance_payments:'Advance Payments', reports:'Reports', dashboard:'Dashboard',
+    employees:'Employees', payroll:'Payroll', timeoff:'Time Off'
+  };
+  var MODULE_GROUPS = {
+    'Items & Inventory': ['items','item_groups','price_lists','warehouses','adjustments','grns'],
+    'Sales':             ['customers','enquiries','quotes','sales_orders','delivery_notes','invoices','credit_notes','letters'],
+    'Purchases':         ['vendors','purchase_orders','bills','debit_notes','vendor_credits'],
+    'Finance':           ['accounts','journal_entries','payments','vendor_payments','advance_payments'],
+    'Reports':           ['reports','dashboard'],
+    'HR':                ['employees','payroll','timeoff']
+  };
+
+  function toast(msg, kind){
+    var host = document.getElementById('toastHost');
+    var el = document.createElement('div');
+    el.className = 'toast-item ' + (kind === 'err' ? 'err' : 'ok');
+    el.textContent = msg;
+    host.appendChild(el);
+    setTimeout(function(){ el.remove(); }, 3500);
+  }
+
+  var secret = sessionStorage.getItem(SECRET_KEY) || '';
+  var licenses = [];
+  var tab = 'pending';
+  var actingId = null;
+
+  var unlockScreen = document.getElementById('unlockScreen');
+  var mainScreen = document.getElementById('mainScreen');
+  var secretInput = document.getElementById('secretInput');
+  var unlockBtn = document.getElementById('unlockBtn');
+
+  async function load(s){
+    unlockBtn.disabled = true;
+    unlockBtn.textContent = 'Checking…';
+    try {
+      var res = await fetch(API_BASE + '/api/admin/licenses', { headers: { 'X-Admin-Secret': s } });
+      if (!res.ok) {
+        toast(res.status === 403 ? 'Wrong admin secret' : 'Failed to load licenses', 'err');
+        sessionStorage.removeItem(SECRET_KEY);
+        return false;
+      }
+      var body = await res.json();
+      licenses = body.data || [];
+      secret = s;
+      sessionStorage.setItem(SECRET_KEY, s);
+      unlockScreen.style.display = 'none';
+      mainScreen.style.display = 'block';
+      render();
+      return true;
+    } catch (e) {
+      toast('Could not reach the server', 'err');
+      return false;
+    } finally {
+      unlockBtn.disabled = false;
+      unlockBtn.textContent = 'Unlock';
+    }
+  }
+
+  unlockBtn.addEventListener('click', function(){
+    if (!secretInput.value.trim()) { toast('Enter the admin secret', 'err'); return; }
+    load(secretInput.value.trim());
+  });
+  secretInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') unlockBtn.click(); });
+
+  document.getElementById('tabPending').addEventListener('click', function(){ setTab('pending'); });
+  document.getElementById('tabAll').addEventListener('click', function(){ setTab('all'); });
+  function setTab(t){ tab = t; render(); }
+
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function render(){
+    var pending = licenses.filter(function(k){ return k.status === 'pending'; });
+    document.getElementById('countLine').textContent = licenses.length + ' total · ' + pending.length + ' pending review';
+    document.getElementById('tabPending').textContent = 'Pending (' + pending.length + ')';
+    document.getElementById('tabPending').classList.toggle('active', tab === 'pending');
+    document.getElementById('tabAll').classList.toggle('active', tab === 'all');
+
+    var rows = tab === 'pending' ? pending : licenses;
+    var body = document.getElementById('rowsBody');
+    body.innerHTML = '';
+
+    if (rows.length === 0) {
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td colspan="9" style="padding:28px;text-align:center;color:#64748b;">' + (tab === 'pending' ? 'No pending requests.' : 'No licenses issued yet.') + '</td>';
+      body.appendChild(tr);
+      return;
+    }
+
+    rows.forEach(function(k){
+      var tr = document.createElement('tr');
+
+      var codeCell = k.upgradeForCode
+        ? '<span style="color:#fbbf24;">↑ ' + esc(k.upgradeForCode) + '</span>'
+        : esc(k.code || '—');
+
+      var orgsCell = k.upgradeForCode
+        ? (k.additionalOrganizations > 0 ? '+' + k.additionalOrganizations : '—')
+        : (k.orgsUsed + ' / ' + k.maxOrganizations);
+      var orgsColor = (!k.upgradeForCode && k.orgsUsed >= k.maxOrganizations) ? '#f87171' : '#cbd5e1';
+
+      var usersCell;
+      if (k.upgradeForCode) {
+        usersCell = k.requestedMaxUsers > 0 ? ('→ ' + k.requestedMaxUsers) : '—';
+      } else if (k.maxUsersPerOrg > 0) {
+        usersCell = k.maxUsersPerOrg;
+      } else if (k.requestedMaxUsers > 0) {
+        usersCell = k.requestedMaxUsers + ' <span style="color:#64748b;font-size:10px;">(requested)</span>';
+      } else {
+        usersCell = 'Unlimited';
+      }
+
+      var modulesCell;
+      if (k.upgradeForCode) {
+        modulesCell = (k.requestedModules && k.requestedModules.length)
+          ? '+' + esc(k.requestedModules.join(', '))
+          : '<span style="color:#64748b;font-size:11px;">org-quota upgrade only</span>';
+      } else {
+        var list = (k.allowedModules && k.allowedModules.length) ? k.allowedModules : (k.requestedModules || []);
+        modulesCell = esc(list.join(', '));
+        if (k.status === 'pending' && k.requestedModules && k.requestedModules.length) {
+          modulesCell += ' <span style="color:#64748b;font-size:10px;">(requested)</span>';
+        }
+      }
+
+      var statusOk = k.status === 'active' || k.status === 'fulfilled';
+      var statusColor = statusOk ? '#34d399' : (k.status === 'pending' ? '#fbbf24' : '#f87171');
+      var statusBg = statusOk ? 'rgba(16,185,129,0.15)' : (k.status === 'pending' ? 'rgba(245,158,11,0.15)' : 'rgba(239,68,68,0.15)');
+
+      var expires = k.expiresAt ? new Date(k.expiresAt).toLocaleDateString() : 'Never';
+
+      var actionsCell = '';
+      if (k.status === 'pending') {
+        var busy = actingId === k._id;
+        actionsCell =
+          '<div style="display:flex;gap:6px;">' +
+            '<button class="act-btn act-approve" data-approve="' + k._id + '" ' + (busy ? 'disabled' : '') + '>' + (busy ? '…' : 'Approve') + '</button>' +
+            '<button class="act-btn act-reject" data-reject="' + k._id + '" ' + (busy ? 'disabled' : '') + '>Reject</button>' +
+          '</div>';
+      }
+
+      tr.innerHTML =
+        '<td style="font-family:ui-monospace,monospace;color:#93c5fd;">' + codeCell + '</td>' +
+        '<td style="color:#e2e8f0;">' + esc(k.customerName) + '<br><span style="color:#64748b;font-size:11px;">' + esc(k.customerEmail) + '</span></td>' +
+        '<td style="color:#cbd5e1;">' + esc(k.planName || '—') + '</td>' +
+        '<td style="color:' + orgsColor + ';">' + orgsCell + '</td>' +
+        '<td style="color:#cbd5e1;">' + usersCell + '</td>' +
+        '<td style="color:#94a3b8;max-width:220px;">' + modulesCell + '</td>' +
+        '<td><span class="badge" style="background:' + statusBg + ';color:' + statusColor + ';">' + esc(k.status) + '</span></td>' +
+        '<td style="color:#64748b;">' + expires + '</td>' +
+        '<td>' + actionsCell + '</td>';
+      body.appendChild(tr);
+    });
+
+    body.querySelectorAll('[data-approve]').forEach(function(btn){
+      btn.addEventListener('click', function(){ approve(btn.getAttribute('data-approve')); });
+    });
+    body.querySelectorAll('[data-reject]').forEach(function(btn){
+      btn.addEventListener('click', function(){ reject(btn.getAttribute('data-reject')); });
+    });
+  }
+
+  async function approve(id){
+    actingId = id; render();
+    try {
+      var res = await fetch(API_BASE + '/api/admin/licenses/' + id + '/approve', {
+        method: 'PATCH', headers: { 'X-Admin-Secret': secret }
+      });
+      var body = await res.json();
+      if (!res.ok) { toast(body.message || 'Failed to approve', 'err'); return; }
+      toast(body.message || 'Approved', 'ok');
+      if (body.data && body.data.code) showCodeModal('License approved', body.data.code);
+      await load(secret);
+    } catch (e) {
+      toast('Could not reach the server', 'err');
+    } finally {
+      actingId = null; render();
+    }
+  }
+
+  async function reject(id){
+    actingId = id; render();
+    try {
+      var res = await fetch(API_BASE + '/api/admin/licenses/' + id + '/reject', {
+        method: 'PATCH', headers: { 'X-Admin-Secret': secret }
+      });
+      var body = await res.json();
+      if (!res.ok) { toast(body.message || 'Failed to reject', 'err'); return; }
+      toast('Request rejected', 'ok');
+      await load(secret);
+    } catch (e) {
+      toast('Could not reach the server', 'err');
+    } finally {
+      actingId = null; render();
+    }
+  }
+
+  /* ── New License drawer ─────────────────────────────────────────── */
+  var drawerOverlay = document.getElementById('drawerOverlay');
+  var nlSelectedModules = [];
+
+  document.getElementById('newLicenseBtn').addEventListener('click', openDrawer);
+  document.getElementById('drawerBg').addEventListener('click', closeDrawer);
+
+  function openDrawer(){
+    document.getElementById('nlName').value = '';
+    document.getElementById('nlEmail').value = '';
+    document.getElementById('nlPlan').value = '';
+    document.getElementById('nlOrgs').value = 1;
+    document.getElementById('nlMaxUsers').value = '';
+    document.getElementById('nlExpires').value = '';
+    nlSelectedModules = [];
+    renderModuleGroups();
+    drawerOverlay.classList.add('open');
+  }
+  function closeDrawer(){ drawerOverlay.classList.remove('open'); }
+
+  function renderModuleGroups(){
+    var host = document.getElementById('nlModuleGroups');
+    host.innerHTML = '';
+    Object.keys(MODULE_GROUPS).forEach(function(group){
+      var wrap = document.createElement('div');
+      wrap.style.marginBottom = '12px';
+      var title = document.createElement('p');
+      title.className = 'grp-name';
+      title.textContent = group;
+      wrap.appendChild(title);
+      var grid = document.createElement('div');
+      grid.className = 'mod-grid';
+      MODULE_GROUPS[group].forEach(function(key){
+        var label = document.createElement('label');
+        label.className = 'mod-check';
+        var cb = document.createElement('input');
+        cb.type = 'checkbox';
+        cb.checked = nlSelectedModules.indexOf(key) !== -1;
+        cb.addEventListener('change', function(){
+          var i = nlSelectedModules.indexOf(key);
+          if (cb.checked && i === -1) nlSelectedModules.push(key);
+          if (!cb.checked && i !== -1) nlSelectedModules.splice(i, 1);
+        });
+        label.appendChild(cb);
+        var span = document.createElement('span');
+        span.textContent = MODULE_LABELS[key] || key;
+        label.appendChild(span);
+        grid.appendChild(label);
+      });
+      wrap.appendChild(grid);
+      host.appendChild(wrap);
+    });
+  }
+
+  document.getElementById('nlSubmitBtn').addEventListener('click', async function(){
+    var name = document.getElementById('nlName').value.trim();
+    if (!name) { toast('Customer name is required', 'err'); return; }
+    if (nlSelectedModules.length === 0) { toast('Select at least one allowed module', 'err'); return; }
+    var btn = document.getElementById('nlSubmitBtn');
+    btn.disabled = true; btn.textContent = 'Creating…';
+    try {
+      var res = await fetch(API_BASE + '/api/admin/licenses', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': secret },
+        body: JSON.stringify({
+          customerName: name,
+          customerEmail: document.getElementById('nlEmail').value.trim(),
+          planName: document.getElementById('nlPlan').value.trim(),
+          maxOrganizations: Number(document.getElementById('nlOrgs').value) || 1,
+          maxUsersPerOrg: Number(document.getElementById('nlMaxUsers').value) || 0,
+          allowedModules: nlSelectedModules,
+          expiresAt: document.getElementById('nlExpires').value || null
+        })
+      });
+      var body = await res.json();
+      if (!res.ok) { toast(body.message || 'Failed to create license', 'err'); return; }
+      closeDrawer();
+      showCodeModal('License created', body.data.code);
+      await load(secret);
+    } catch (e) {
+      toast('Could not reach the server', 'err');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Create License';
+    }
+  });
+
+  /* ── Code modal (shared: new license + approve-email-failed fallback) ── */
+  var codeOverlay = document.getElementById('codeOverlay');
+  function showCodeModal(title, code){
+    document.getElementById('codeModalTitle').textContent = title;
+    document.getElementById('codeModalValue').textContent = code;
+    codeOverlay.classList.add('open');
+  }
+  document.getElementById('codeCopyBtn').addEventListener('click', function(){
+    navigator.clipboard.writeText(document.getElementById('codeModalValue').textContent);
+    toast('Copied', 'ok');
+  });
+  document.getElementById('codeDoneBtn').addEventListener('click', function(){
+    codeOverlay.classList.remove('open');
+  });
+
+  if (secret) load(secret);
+</script>
+
+</body>
+</html>
