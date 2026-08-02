@@ -112,6 +112,26 @@
   .tier-row .tier-price{font-size:15.5px;font-weight:800;text-align:right;white-space:nowrap;}
   .tier-row .tier-price small{display:block;font-size:11px;font-weight:600;color:var(--sub);}
 
+  /* ── À-la-carte module picker (replaces fixed tier-row list) ─────── */
+  .module-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  @media (max-width:520px){ .module-grid{grid-template-columns:repeat(2,1fr);} }
+  .module-card{border:1.5px solid var(--line);border-radius:14px;padding:13px 14px;cursor:pointer;transition:all .15s;background:#fff;user-select:none;}
+  .module-card:hover{border-color:var(--sub-soft);}
+  .module-card.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:0 0 0 3px rgba(13,122,145,.08) inset;}
+  .module-card-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:5px;}
+  .module-card-name{font-size:13px;font-weight:800;}
+  .module-card-chk{width:17px;height:17px;border-radius:6px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10.5px;font-weight:800;color:#fff;background:var(--line);}
+  .module-card.on .module-card-chk{background:var(--accent);}
+  .module-card-price{font-size:12px;font-weight:700;color:var(--accent-dark);margin-bottom:4px;}
+  .module-card-price small{font-weight:600;color:var(--sub);}
+  .module-card-desc{font-size:11px;color:var(--sub);line-height:1.4;}
+
+  .price-summary{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13px;}
+  .price-summary-row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;color:var(--sub);}
+  .price-summary-total{display:flex;justify-content:space-between;padding-top:8px;margin-top:6px;border-top:1px solid var(--line);font-size:16px;font-weight:800;color:var(--ink);}
+  .org-calc-note{font-size:11.5px;color:var(--sub-soft);margin:0;}
+  .org-calc-note a{font-weight:700;}
+
   /* ── OS picker ──────────────────────────────────────────────────── */
   .os-tabs{display:inline-flex;justify-content:center;gap:3px;margin:46px auto 0;flex-wrap:wrap;background:var(--line-soft);border:1px solid var(--line);border-radius:14px;padding:5px;}
   .os-tab{display:flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;border:none;background:transparent;font-size:15px;font-weight:700;cursor:pointer;color:var(--sub);transition:all .15s;}
@@ -264,10 +284,13 @@
 
             <div class="billing-toggle">
               <button id="billMonthly" class="billing-opt" type="button">Monthly</button>
-              <button id="billAnnual" class="billing-opt active" type="button">Annual <span>save 17%</span></button>
+              <button id="billAnnual" class="billing-opt active" type="button">Annual <span>save 15%</span></button>
             </div>
 
-            <div id="tierList" style="display:flex;flex-direction:column;gap:10px;"></div>
+            <div id="moduleGrid" class="module-grid"></div>
+            <p class="org-calc-note">Pricing shown is per organization. Need more than one organization? <a href="#" id="jumpToOrgsNew">See organizations below</a>.</p>
+
+            <div id="priceSummaryNew" class="price-summary"></div>
 
             <div>
               <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Number of users</label>
@@ -278,7 +301,7 @@
             <div>
               <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Organizations needed</label>
               <input id="reqOrgs" class="txt-input" type="number" min="1" value="1" style="width:100%;">
-              <p id="orgsHint" style="font-size:12.5px;color:var(--sub);margin:6px 0 0;">Starter and Growth run 1 organization. Need more? Enterprise supports several under one login — common for accounting firms and franchise owners.</p>
+              <p id="orgsHint" style="font-size:12.5px;color:var(--sub);margin:6px 0 0;">Each subscription includes 1 organization. Need more than one? We'll follow up by email with pricing before anything is finalized.</p>
             </div>
 
             <p id="multiOrgNotice" style="font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0;" hidden>Multiple organizations is an Enterprise, negotiated-price case — we'll follow up by email with pricing before anything is finalized.</p>
@@ -313,9 +336,13 @@
               <div id="upgradePlanFields" style="display:none;flex-direction:column;gap:10px;">
                 <div class="billing-toggle">
                   <button id="upgradeBillMonthly" class="billing-opt" type="button">Monthly</button>
-                  <button id="upgradeBillAnnual" class="billing-opt active" type="button">Annual <span>save 17%</span></button>
+                  <button id="upgradeBillAnnual" class="billing-opt active" type="button">Annual <span>save 15%</span></button>
                 </div>
-                <div id="upgradeTierList" style="display:flex;flex-direction:column;gap:10px;"></div>
+                <div id="upgradeModuleGrid" class="module-grid"></div>
+                <p class="org-calc-note">Pricing shown is per organization. Need more than one organization? <a href="#" id="jumpToOrgsUpgrade">See additional organizations above</a>.</p>
+
+                <div id="priceSummaryUpgrade" class="price-summary"></div>
+
                 <div>
                   <label style="display:block;font-size:12.5px;font-weight:700;color:var(--ink);margin:0 0 6px;">Number of users</label>
                   <input id="upgradeSeats" class="txt-input" type="number" min="1" value="1" style="width:100%;">
@@ -463,6 +490,11 @@
           <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
           <h4>HR &amp; Payroll</h4>
           <p>Employee directory, org chart, salary structures, pay runs with GL posting, payslips, and paid/unpaid time-off with manager approval.</p>
+        </div>
+        <div class="mod-card">
+          <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2M9 12h6M9 16h6"/></svg></div>
+          <h4>Project</h4>
+          <p>Project tracking tied to your other records — tasks, timelines and status, kept in the same backend as everything else.</p>
         </div>
       </div>
       <p class="mod-note">Role-based access control (who on your team can do what) is built into every plan — it's not a module, it applies regardless.</p>
@@ -624,154 +656,220 @@
   }
 
   // ── Request a key — self-serve. New key, or upgrade an existing one.
+  // MODULE_GROUPS is the source of truth mapping each purchasable module to
+  // the internal feature keys it unlocks server-side (requestedModules).
+  // NOTE — decision point: 'Project' has no registered backend permission
+  // module yet (no 'projects' key anywhere in helper/permissions.js or the
+  // Go backend's module list — Projects.jsx exists as a page but isn't wired
+  // into module-gating). Using a single 'projects' key here as a placeholder
+  // (matches the Mongo collection name in project_controller.go) — confirm
+  // and adjust once that module is actually gated server-side.
   var MODULE_GROUPS = {
-    'Inventory':   ['items','item_groups','price_lists','warehouses','adjustments','grns'],
-    'Sales':       ['customers','enquiries','quotes','sales_orders','delivery_notes','invoices','credit_notes','letters'],
-    'Purchases':   ['vendors','purchase_orders','bills','debit_notes','vendor_credits'],
-    'Finance':     ['accounts','journal_entries','payments','vendor_payments','advance_payments'],
-    'Reports':     ['reports','dashboard'],
-    'HR':          ['employees','payroll','timeoff']
+    'Sales':     ['customers','enquiries','quotes','sales_orders','delivery_notes','invoices','credit_notes','letters'],
+    'Purchase':  ['vendors','purchase_orders','bills','debit_notes','vendor_credits'],
+    'Inventory': ['items','item_groups','price_lists','warehouses','adjustments','grns'],
+    'Project':   ['projects'],
+    'HR':        ['employees','payroll','timeoff'],
+    'Reports':   ['reports','dashboard'],
+    'Finance':   ['accounts','journal_entries','payments','vendor_payments','advance_payments']
   };
 
-  // Fixed plan tiers — maxUsers is a ceiling only (0 = unlimited), enforced
-  // server-side per-org by InviteMember; price is illustrative, no billing
-  // is actually wired up yet. Modules for each tier build on the one before.
-  var PLAN_TIERS = [
-    {
-      key: 'starter', name: 'Starter', maxUsers: 5, annualPrice: 1490,
-      desc: 'Sales · Inventory · Accounting/VAT · up to 5 users',
-      groups: ['Sales', 'Inventory', 'Finance']
-    },
-    {
-      key: 'growth', name: 'Growth', maxUsers: 15, annualPrice: 1990,
-      desc: '+ Purchase · HR · up to 15 users',
-      groups: ['Sales', 'Inventory', 'Finance', 'Purchases', 'HR']
-    },
-    {
-      key: 'enterprise', name: 'Enterprise', maxUsers: 0, annualPrice: null,
-      desc: '+ Reports · priority support · unlimited users',
-      groups: ['Sales', 'Inventory', 'Finance', 'Purchases', 'HR', 'Reports']
-    }
+  // À-la-carte pricing. Base fee + per-user license are mandatory (not
+  // user-facing toggles); the 7 modules below are what's actually selectable,
+  // each priced per user/month. No billing is actually wired up yet — same
+  // "illustrative pricing" status the old fixed tiers had.
+  var BASE_FEE    = 49; // AED/month, org-wide, always included once
+  var LICENSE_FEE = 39; // AED/user/month, mandatory — Items master only, no modules
+  var MODULES = [
+    { key: 'Sales',     label: 'Sales',        price: 25, desc: 'Customers, quotes, sales orders, invoices, credit notes' },
+    { key: 'Purchase',  label: 'Purchase',     price: 25, desc: 'Vendors, purchase orders, bills, debit/vendor credits' },
+    { key: 'Inventory', label: 'Inventory',    price: 20, desc: 'Item groups, price lists, warehouses, adjustments, GRNs' },
+    { key: 'Project',   label: 'Project',      price: 30, desc: 'Project tracking' },
+    { key: 'HR',        label: 'HR & Payroll', price: 35, desc: 'Employees, payroll, time off' },
+    { key: 'Reports',   label: 'Reports',      price: 15, desc: 'Reports & dashboard' },
+    { key: 'Finance',   label: 'Finance',      price: 30, desc: 'Accounts, journal entries, VAT, payments' }
   ];
-  function tierModules(tier){
+
+  // Bundle discount by module count — thresholds already cover 7 modules
+  // as-is (">= 6" catches both 6 and 7 = "all"), only the comment changed.
+  function bundleDiscount(n){
+    if (n >= 6) return 0.20; // 6–7 (all)
+    if (n >= 4) return 0.15; // 4–5
+    if (n >= 2) return 0.10; // 2–3
+    return 0;                // 0–1
+  }
+  function modulesFromKeys(keys){
     var mods = [];
-    tier.groups.forEach(function(g){ MODULE_GROUPS[g].forEach(function(m){ if (mods.indexOf(m) === -1) mods.push(m); }); });
+    keys.forEach(function(k){ (MODULE_GROUPS[k] || []).forEach(function(m){ if (mods.indexOf(m) === -1) mods.push(m); }); });
     return mods;
   }
+  function buildPlanName(keys, seats, billingAnnual){
+    var labels = keys.map(function(k){ var m = MODULES.find(function(mm){ return mm.key === k; }); return m ? m.label : k; });
+    var modPart = labels.length ? labels.join(' + ') : 'Base plan (no modules)';
+    return modPart + ' (' + seats + ' user' + (seats === 1 ? '' : 's') + ', ' + (billingAnnual ? 'annual' : 'monthly') + ')';
+  }
+  // Single pricing formula shared by both the new-request and upgrade
+  // calculators. Seats × (mandatory license + discounted module subtotal),
+  // plus the org-wide base fee once. Annual takes a further 15% off that
+  // monthly total (compounds with the bundle discount, not additive).
+  function calcPrice(keys, seats, billingAnnual){
+    var moduleSubtotal = keys.reduce(function(s, k){
+      var m = MODULES.find(function(mm){ return mm.key === k; });
+      return s + (m ? m.price : 0);
+    }, 0);
+    var discountPct = bundleDiscount(keys.length);
+    var discountedModules = moduleSubtotal * (1 - discountPct);
+    var perUserPerMonth = LICENSE_FEE + discountedModules;
+    var monthlyTotal = perUserPerMonth * seats + BASE_FEE;
+    var yearlyTotal = monthlyTotal * 0.85 * 12; // 15% off the monthly-equivalent, then × 12
+    return {
+      perUserPerMonth: perUserPerMonth,
+      discountPct: Math.round(discountPct * 100),
+      monthlyTotal: monthlyTotal,
+      yearlyTotal: yearlyTotal,
+      displayTotal: billingAnnual ? yearlyTotal : monthlyTotal,
+      displayCycle: billingAnnual ? '/year' : '/month'
+    };
+  }
 
-  // Generic tier-list renderer + seat-limit hint, parameterized so the same
-  // picker works both for a fresh-key request and for "upgrade my existing
-  // key's plan" — two independent selections/billing toggles, same widget.
-  function makeTierPicker(opts){
-    var state = { tierKey: opts.defaultTier || 'starter', billingAnnual: true };
+  // Generic module-grid + live price-summary renderer, parameterized so the
+  // same picker works both for a fresh-key request and for "upgrade my
+  // existing key's plan" — two independent selections/billing toggles, same
+  // widget (mirrors the old makeTierPicker's shape/API).
+  function makeModulePicker(opts){
+    var state = { selected: {}, billingAnnual: true };
+    (opts.defaultModules || []).forEach(function(k){ state.selected[k] = true; });
 
-    function fmtPrice(tier){
-      if (tier.annualPrice == null) return { main: 'Custom', sub: 'contact sales' };
-      var price = state.billingAnnual ? tier.annualPrice : Math.round(tier.annualPrice / 12 / 0.83);
-      return { main: 'AED ' + price.toLocaleString(), sub: state.billingAnnual ? '/user/yr' : '/user/mo' };
-    }
+    function selectedKeys(){ return MODULES.filter(function(m){ return state.selected[m.key]; }).map(function(m){ return m.key; }); }
+    function seats(){ return parseInt(opts.seatsEl.value, 10) || 1; }
+    function price(){ return calcPrice(selectedKeys(), seats(), state.billingAnnual); }
 
-    function currentTier(){ return PLAN_TIERS.find(function(t){ return t.key === state.tierKey; }); }
-
-    function renderTiers(){
-      opts.listEl.innerHTML = '';
-      PLAN_TIERS.forEach(function(tier){
-        var price = fmtPrice(tier);
-        var row = document.createElement('div');
-        row.className = 'tier-row' + (tier.key === state.tierKey ? ' selected' : '');
-        row.innerHTML =
-          '<div><div class="tier-name">' + tier.name + '</div><div class="tier-desc">' + tier.desc + '</div></div>' +
-          '<div class="tier-price">' + price.main + '<small>' + price.sub + '</small></div>';
-        row.addEventListener('click', function(){ selectTier(tier.key); });
-        opts.listEl.appendChild(row);
+    function renderGrid(){
+      opts.gridEl.innerHTML = '';
+      MODULES.forEach(function(m){
+        var on = !!state.selected[m.key];
+        var card = document.createElement('div');
+        card.className = 'module-card' + (on ? ' on' : '');
+        card.innerHTML =
+          '<div class="module-card-top"><span class="module-card-name">' + m.label + '</span><span class="module-card-chk">' + (on ? '✓' : '') + '</span></div>' +
+          '<div class="module-card-price">AED ' + m.price + '<small>/user/mo</small></div>' +
+          '<div class="module-card-desc">' + m.desc + '</div>';
+        card.addEventListener('click', function(){ state.selected[m.key] = !on; renderAll(); });
+        opts.gridEl.appendChild(card);
       });
     }
 
-    function renderSeatHint(){
-      var seats = parseInt(opts.seatsEl.value, 10) || 0;
-      var tier = currentTier();
-      var linkId = opts.hintEl.id + 'Link';
-      if (tier.maxUsers > 0 && seats > tier.maxUsers) {
-        var next = PLAN_TIERS[PLAN_TIERS.indexOf(tier) + 1];
-        opts.hintEl.innerHTML = seats + ' exceeds ' + tier.name + '\'s ' + tier.maxUsers + '-user limit — '
-          + (next ? '<a href="#" id="' + linkId + '" style="font-weight:700;">upgrade to ' + next.name + '</a> for more seats.' : 'contact sales for more seats.');
-        opts.hintEl.style.color = '#dc2626';
-        var link = document.getElementById(linkId);
-        if (link) link.addEventListener('click', function(e){ e.preventDefault(); selectTier(next.key); });
-        if (opts.onValidChange) opts.onValidChange(false);
-        return;
+    function renderSummary(){
+      var p = price();
+      var n = selectedKeys().length;
+      var moduleLine = n
+        ? ('Modules (' + n + ' selected' + (p.discountPct ? ', ' + p.discountPct + '% bundle discount' : '') + ')')
+        : 'Modules (none selected)';
+      var html =
+        '<div class="price-summary-row"><span>Per-user license (Items master only)</span><span>AED ' + LICENSE_FEE + '/user/mo</span></div>' +
+        '<div class="price-summary-row"><span>' + moduleLine + '</span><span>AED ' + Math.round(p.perUserPerMonth - LICENSE_FEE) + '/user/mo</span></div>' +
+        '<div class="price-summary-row"><span>' + seats() + ' user' + (seats() === 1 ? '' : 's') + ' + AED ' + BASE_FEE + ' base fee</span><span></span></div>' +
+        '<div class="price-summary-total"><span>Total' + (state.billingAnnual ? ' (billed yearly)' : ' (billed monthly)') + '</span><span>AED ' + Math.round(p.displayTotal).toLocaleString() + p.displayCycle + '</span></div>';
+      // orgsEl is only wired for the new-request flow — this total is always
+      // priced for exactly 1 org, so make that explicit the moment more are
+      // requested instead of letting the number sit there implying it's priced in.
+      if (opts.orgsEl && (parseInt(opts.orgsEl.value, 10) || 1) > 1) {
+        html += '<div class="price-summary-row" style="color:#dc2626;"><span>Additional organizations priced separately</span><span>we\'ll follow up by email</span></div>';
       }
-      opts.hintEl.textContent = tier.maxUsers > 0 ? ('max ' + tier.maxUsers + ' users on ' + tier.name) : ('unlimited users on ' + tier.name);
+      opts.summaryEl.innerHTML = html;
+    }
+
+    // No more seat-limit ceiling — modules don't gate seat count anymore.
+    // The hint slot stays (same DOM position/pattern as the old
+    // renderSeatHint) but now just surfaces the effective per-seat rate.
+    // Annual billing's total already has the 15% discount baked in, but this
+    // per-user figure is always the raw monthly rate — flag that explicitly
+    // so it doesn't read as a math mismatch against the total below it.
+    function renderHint(){
+      var p = price();
+      var suffix = state.billingAnnual ? ' before annual discount' : '';
+      opts.hintEl.textContent = 'AED ' + Math.round(p.perUserPerMonth) + '/user/month' + suffix + ' · no seat limit';
       opts.hintEl.style.color = 'var(--sub)';
       if (opts.onValidChange) opts.onValidChange(true);
     }
 
-    function selectTier(key){
-      state.tierKey = key;
-      renderTiers();
-      renderSeatHint();
-      if (opts.onTierSelect) opts.onTierSelect(key);
-    }
+    function renderAll(){ renderGrid(); renderSummary(); renderHint(); }
 
-    opts.billMonthlyEl.addEventListener('click', function(){ state.billingAnnual = false; opts.billMonthlyEl.classList.add('active'); opts.billAnnualEl.classList.remove('active'); renderTiers(); });
-    opts.billAnnualEl.addEventListener('click', function(){ state.billingAnnual = true; opts.billAnnualEl.classList.add('active'); opts.billMonthlyEl.classList.remove('active'); renderTiers(); });
-    opts.seatsEl.addEventListener('input', renderSeatHint);
+    opts.billMonthlyEl.addEventListener('click', function(){ state.billingAnnual = false; opts.billMonthlyEl.classList.add('active'); opts.billAnnualEl.classList.remove('active'); renderAll(); });
+    opts.billAnnualEl.addEventListener('click', function(){ state.billingAnnual = true; opts.billAnnualEl.classList.add('active'); opts.billMonthlyEl.classList.remove('active'); renderAll(); });
+    opts.seatsEl.addEventListener('input', renderAll);
 
     return {
-      render: function(){ renderTiers(); renderSeatHint(); },
-      currentTier: currentTier,
-      seats: function(){ return parseInt(opts.seatsEl.value, 10) || 1; },
-      select: selectTier
+      render: renderAll,
+      selectedKeys: selectedKeys,
+      seats: seats,
+      billingAnnual: function(){ return state.billingAnnual; }
     };
   }
 
   var reqSubmitBtnNew = document.getElementById('reqSubmitBtnNew');
   var reqSubmitBtnUpgrade = document.getElementById('reqSubmitBtnUpgrade');
 
-  // Starter/Growth are single-org SME tiers — no self-serve path for more
-  // than 1. Asking for more auto-switches to Enterprise (negotiated,
-  // contact-sales) instead of silently accepting a number those tiers
-  // don't support; mirrors the same rule RequestLicense enforces server-side.
-  // Switching back away from Enterprise clamps orgs back down to 1 too, so
-  // the two fields can never disagree with each other.
+  // Org count is priced/handled entirely outside the module calculator (see
+  // spec note above MODULE_GROUPS) — more than 1 org always routes through
+  // the existing manual-review path via multiOrgNotice, independent of
+  // whatever modules/seats are selected. This mirrors the same rule
+  // RequestLicense enforces server-side. The calculator itself still never
+  // computes org pricing — it only reads reqOrgs (via opts.orgsEl) to show a
+  // "priced separately" line and relabel the submit button; it never writes
+  // to it, and requestedModules/requestedMaxUsers stay org-count-agnostic.
   var reqOrgsEl = document.getElementById('reqOrgs');
   var multiOrgNotice = document.getElementById('multiOrgNotice');
 
-  var newTierPicker = makeTierPicker({
-    listEl: document.getElementById('tierList'),
+  var newModulePicker = makeModulePicker({
+    gridEl: document.getElementById('moduleGrid'),
+    summaryEl: document.getElementById('priceSummaryNew'),
     seatsEl: document.getElementById('reqSeats'),
     hintEl: document.getElementById('seatHint'),
     billMonthlyEl: document.getElementById('billMonthly'),
     billAnnualEl: document.getElementById('billAnnual'),
-    onValidChange: function(valid){ reqSubmitBtnNew.disabled = !valid; },
-    onTierSelect: function(key){
-      if (key !== 'enterprise') {
-        reqOrgsEl.value = 1;
-        multiOrgNotice.hidden = true;
-      }
-    }
+    orgsEl: reqOrgsEl,
+    defaultModules: ['Sales', 'Inventory'],
+    onValidChange: function(valid){ reqSubmitBtnNew.disabled = !valid; }
   });
-  newTierPicker.render();
+  newModulePicker.render();
+
+  function updateNewSubmitLabel(){
+    var orgs = parseInt(reqOrgsEl.value, 10) || 1;
+    reqSubmitBtnNew.textContent = orgs > 1 ? 'Request quote' : 'Submit Request';
+  }
+  updateNewSubmitLabel();
 
   reqOrgsEl.addEventListener('input', function(){
     var orgs = parseInt(reqOrgsEl.value, 10) || 1;
-    var tier = newTierPicker.currentTier();
-    if (orgs > 1 && tier.key !== 'enterprise') {
-      newTierPicker.select('enterprise');
-    }
     multiOrgNotice.hidden = orgs <= 1;
+    updateNewSubmitLabel();
+    newModulePicker.render(); // refresh the "priced separately" summary line
   });
 
-  var upgradeTierPicker = makeTierPicker({
-    listEl: document.getElementById('upgradeTierList'),
+  document.getElementById('jumpToOrgsNew').addEventListener('click', function(e){
+    e.preventDefault();
+    reqOrgsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    reqOrgsEl.focus();
+  });
+
+  var upgradeModulePicker = makeModulePicker({
+    gridEl: document.getElementById('upgradeModuleGrid'),
+    summaryEl: document.getElementById('priceSummaryUpgrade'),
     seatsEl: document.getElementById('upgradeSeats'),
     hintEl: document.getElementById('upgradeSeatHint'),
     billMonthlyEl: document.getElementById('upgradeBillMonthly'),
     billAnnualEl: document.getElementById('upgradeBillAnnual'),
-    defaultTier: 'growth', // suggesting the next tier up is the common case for an upgrade
     onValidChange: function(valid){ reqSubmitBtnUpgrade.disabled = !valid; }
   });
-  upgradeTierPicker.render();
+  upgradeModulePicker.render();
+
+  document.getElementById('jumpToOrgsUpgrade').addEventListener('click', function(e){
+    e.preventDefault();
+    var addOrgsEl = document.getElementById('reqAdditionalOrgs');
+    addOrgsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    addOrgsEl.focus();
+  });
 
   var reqWantsPlanBump = document.getElementById('reqWantsPlanBump');
   var upgradePlanFields = document.getElementById('upgradePlanFields');
@@ -779,7 +877,7 @@
     var on = reqWantsPlanBump.checked;
     upgradePlanFields.style.display = on ? 'flex' : 'none';
     if (!on) reqSubmitBtnUpgrade.disabled = false; // plan section hidden — its validity no longer blocks submit
-    else upgradeTierPicker.render(); // re-check seat/tier validity now that it's back in play
+    else upgradeModulePicker.render(); // re-render module grid + price summary now that it's back in view
   });
   var reqError = document.getElementById('reqError');
   var reqSuccess = document.getElementById('reqSuccess');
@@ -866,25 +964,27 @@
 
       var wantsPlanBump = reqWantsPlanBump.checked;
       if (wantsPlanBump) {
-        var uTier = upgradeTierPicker.currentTier();
-        var uSeats = upgradeTierPicker.seats();
-        if (uTier.maxUsers > 0 && uSeats > uTier.maxUsers) { showReqError('Reduce seats or pick a higher tier first'); return; }
-        payload.planName = uTier.name;
-        payload.planTier = uTier.key;
-        payload.requestedModules = tierModules(uTier);
+        var uKeys = upgradeModulePicker.selectedKeys();
+        var uSeats = upgradeModulePicker.seats();
+        // planTier: no more fixed tiers now that modules are à la carte —
+        // decision point per spec, set to 'custom' rather than guessed.
+        payload.planName = buildPlanName(uKeys, uSeats, upgradeModulePicker.billingAnnual());
+        payload.planTier = 'custom';
+        payload.requestedModules = modulesFromKeys(uKeys);
         payload.requestedMaxUsers = uSeats;
       }
       if (addOrgs === 0 && !wantsPlanBump) { showReqError('Add more organizations, or check the plan-upgrade box, before submitting'); return; }
       activeBtn = reqSubmitBtnUpgrade;
     } else {
-      var tier = newTierPicker.currentTier();
-      var seats = newTierPicker.seats();
+      var keys = newModulePicker.selectedKeys();
+      var seats = newModulePicker.seats();
       var orgs = parseInt(document.getElementById('reqOrgs').value, 10) || 1;
-      if (tier.maxUsers > 0 && seats > tier.maxUsers) { showReqError('Reduce seats or upgrade your plan first'); return; }
-      payload.planName = tier.name;
-      payload.planTier = tier.key;
+      // planTier: no more fixed tiers now that modules are à la carte —
+      // decision point per spec, set to 'custom' rather than guessed.
+      payload.planName = buildPlanName(keys, seats, newModulePicker.billingAnnual());
+      payload.planTier = 'custom';
       payload.maxOrganizations = orgs;
-      payload.requestedModules = tierModules(tier);
+      payload.requestedModules = modulesFromKeys(keys);
       payload.requestedMaxUsers = seats;
       activeBtn = reqSubmitBtnNew;
     }
@@ -908,7 +1008,11 @@
       showReqError('Could not reach the license server — try again in a moment.');
     } finally {
       activeBtn.disabled = false;
-      activeBtn.textContent = 'Submit Request';
+      // reqSubmitBtnNew's label depends on org count ('Request quote' when >1)
+      // — re-derive it instead of hardcoding, so a failed/retried submit
+      // doesn't silently revert it to 'Submit Request'.
+      if (activeBtn === reqSubmitBtnNew) updateNewSubmitLabel();
+      else activeBtn.textContent = 'Submit Request';
     }
   }
   reqSubmitBtnNew.addEventListener('click', submitRequest);
