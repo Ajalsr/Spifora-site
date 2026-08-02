@@ -363,10 +363,10 @@
       <div class="os-panel" data-panel="mac">
         <div class="os-panel-row">
           <div>
-            <div class="os-panel-file">Coming soon</div>
-            <div class="os-panel-meta">macOS build hasn't been produced yet — Tauri builds on macOS itself, not cross-compiled from this Windows machine.</div>
+            <div class="os-panel-file">Spifora_1.0.0_universal.dmg</div>
+            <div class="os-panel-meta">Universal · Apple Silicon &amp; Intel · macOS 12 Monterey or later · 5.5 MB</div>
           </div>
-          <span class="dl-btn" style="opacity:.45;cursor:not-allowed;pointer-events:none;">Not available yet</span>
+          <a class="dl-btn" href="/downloads/Spifora_1.0.0_universal.dmg" download>Download .dmg</a>
         </div>
       </div>
 
@@ -513,9 +513,9 @@
   };
 
   // ── OS tabs — purely cosmetic, no gating. Same installer for everyone.
-  var OS_HREF      = { windows: '/downloads/Spifora_1.0.0_x64-setup.exe', mac: '#osTabs', linux: '#osTabs' };
-  var OS_AVAILABLE = { windows: true, mac: false, linux: false };
-  var OS_LABEL     = { windows: 'Download for Windows', mac: 'macOS — coming soon', linux: 'Linux — coming soon' };
+  var OS_HREF      = { windows: '/downloads/Spifora_1.0.0_x64-setup.exe', mac: '/downloads/Spifora_1.0.0_universal.dmg', linux: '#osTabs' };
+  var OS_AVAILABLE = { windows: true, mac: true, linux: false };
+  var OS_LABEL     = { windows: 'Download for Windows', mac: 'Download for macOS', linux: 'Linux — coming soon' };
 
   function detectOS(){
     var p = (navigator.platform || '').toLowerCase();
